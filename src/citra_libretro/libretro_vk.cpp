@@ -262,7 +262,7 @@ LibRetroVKInstance::LibRetroVKInstance(Frontend::EmuWindow& window,
 
     // Get queues from LibRetro
     graphics_queue = vulkan_intf->queue;
-    queue_family_index = vulkan_intf->queue_family_index; // modded
+    queue_family_index = vulkan_intf->queue_index; // ai code review comment here is wrong
     present_queue = graphics_queue; // Same queue for LibRetro
 
     if (!graphics_queue) {

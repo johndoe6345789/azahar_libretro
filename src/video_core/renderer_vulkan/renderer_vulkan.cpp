@@ -62,19 +62,18 @@ namespace {
 static bool IsLowRefreshRate() {
 #if (defined(__APPLE__) || defined(ENABLE_SDL2)) && !defined(HAVE_LIBRETRO)
 #ifdef __APPLE__
-// Need a special implementation because MacOS kills itself in disgust if the
-// input thread calls SDL_PumpEvents at the same time as we're in SDL_Init here.
+    // Need a special implementation because MacOS kills itself in disgust if the
+    // input thread calls SDL_PumpEvents at the same time as we're in SDL_Init here.
 
-// Apple's low power mode sometimes limits applications to 30fps without changing
-// the refresh rate, meaning the above code doesn't catch it.
-if (AppleUtils::IsLowPowerModeEnabled()) {
-  LOG_WARNING(Render_Vulkan,
-              "Apple's low power mode is enabled, assuming low application "
-              "framerate. FIFO will be disabled");
-  return true;
-}
+    // Apple's low power mode sometimes limits applications to 30fps without changing
+    // the refresh rate, meaning the above code doesn't catch it.
+    if (AppleUtils::IsLowPowerModeEnabled()) {
+        LOG_WARNING(Render_Vulkan, "Apple's low power mode is enabled, assuming low application "
+                                   "framerate. FIFO will be disabled");
+        return true;
+    }
 
-const auto cur_refresh_rate = AppleUtils::GetRefreshRate();
+    const auto cur_refresh_rate = AppleUtils::GetRefreshRate();
 
 #elif defined(ENABLE_SDL2)
     if (SDL_WasInit(SDL_INIT_VIDEO) == 0) {
@@ -102,17 +101,17 @@ const auto cur_refresh_rate = AppleUtils::GetRefreshRate();
 #endif // defined(__APPLE__) || defined(ENABLE_SDL2)
 
 #if defined(__APPLE__) && !defined(HAVE_LIBRETRO)
-// Apple's low power mode sometimes limits applications to 30fps without changing the refresh
-// rate, meaning the above code doesn't catch it.
-if (AppleUtils::IsLowPowerModeEnabled()) {
-  LOG_WARNING(Render_Vulkan, "Apple's low power mode is enabled, assuming low application "
-                             "framerate. FIFO will be disabled");
-  return true;
-}
+    // Apple's low power mode sometimes limits applications to 30fps without changing the refresh
+    // rate, meaning the above code doesn't catch it.
+    if (AppleUtils::IsLowPowerModeEnabled()) {
+        LOG_WARNING(Render_Vulkan, "Apple's low power mode is enabled, assuming low application "
+                                   "framerate. FIFO will be disabled");
+        return true;
+    }
 #endif
 
-// We have no available method of checking refresh rate. Just assume that everything is fine.
-return false;
+    // We have no available method of checking refresh rate. Just assume that everything is fine.
+    return false;
 }
 } // Anonymous namespace
 

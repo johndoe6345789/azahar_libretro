@@ -1,0 +1,1502 @@
+2025-12-13T19:25:44.5478163Z Current runner version: '2.329.0'
+2025-12-13T19:25:44.5513310Z ##[group]Runner Image Provisioner
+2025-12-13T19:25:44.5514583Z Hosted Compute Agent
+2025-12-13T19:25:44.5515475Z Version: 20251202.455
+2025-12-13T19:25:44.5516998Z Commit: 6c10caca4910e198df60de23adf20ad317c474e3
+2025-12-13T19:25:44.5518274Z Build Date: 2025-12-02T15:56:59Z
+2025-12-13T19:25:44.5519327Z Worker ID: {8bb96bc7-c0e9-4499-9458-a09141103eb2}
+2025-12-13T19:25:44.5520693Z ##[endgroup]
+2025-12-13T19:25:44.5521553Z ##[group]Operating System
+2025-12-13T19:25:44.5522507Z Ubuntu
+2025-12-13T19:25:44.5523393Z 24.04.3
+2025-12-13T19:25:44.5524188Z LTS
+2025-12-13T19:25:44.5524896Z ##[endgroup]
+2025-12-13T19:25:44.5525956Z ##[group]Runner Image
+2025-12-13T19:25:44.5527168Z Image: ubuntu-24.04
+2025-12-13T19:25:44.5528036Z Version: 20251208.163.1
+2025-12-13T19:25:44.5529973Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20251208.163/images/ubuntu/Ubuntu2404-Readme.md
+2025-12-13T19:25:44.5532796Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20251208.163
+2025-12-13T19:25:44.5534745Z ##[endgroup]
+2025-12-13T19:25:44.5539599Z ##[group]GITHUB_TOKEN Permissions
+2025-12-13T19:25:44.5542898Z Actions: write
+2025-12-13T19:25:44.5543795Z ArtifactMetadata: write
+2025-12-13T19:25:44.5544815Z Attestations: write
+2025-12-13T19:25:44.5545632Z Checks: write
+2025-12-13T19:25:44.5546518Z Contents: write
+2025-12-13T19:25:44.5547705Z Deployments: write
+2025-12-13T19:25:44.5548728Z Discussions: write
+2025-12-13T19:25:44.5549584Z Issues: write
+2025-12-13T19:25:44.5550619Z Metadata: read
+2025-12-13T19:25:44.5551447Z Models: read
+2025-12-13T19:25:44.5552279Z Packages: write
+2025-12-13T19:25:44.5553295Z Pages: write
+2025-12-13T19:25:44.5554155Z PullRequests: write
+2025-12-13T19:25:44.5555186Z RepositoryProjects: write
+2025-12-13T19:25:44.5556242Z SecurityEvents: write
+2025-12-13T19:25:44.5557556Z Statuses: write
+2025-12-13T19:25:44.5558365Z ##[endgroup]
+2025-12-13T19:25:44.5562103Z Secret source: Actions
+2025-12-13T19:25:44.5563733Z Prepare workflow directory
+2025-12-13T19:25:44.6179224Z Prepare all required actions
+2025-12-13T19:25:44.6238128Z Getting action download info
+2025-12-13T19:25:44.8385230Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+2025-12-13T19:25:45.0030244Z Complete job name: clang-format
+2025-12-13T19:25:45.0617481Z ##[group]Checking docker version
+2025-12-13T19:25:45.0630461Z ##[command]/usr/bin/docker version --format '{{.Server.APIVersion}}'
+2025-12-13T19:25:45.1367783Z '1.48'
+2025-12-13T19:25:45.1378565Z Docker daemon API version: '1.48'
+2025-12-13T19:25:45.1379299Z ##[command]/usr/bin/docker version --format '{{.Client.APIVersion}}'
+2025-12-13T19:25:45.1549465Z '1.48'
+2025-12-13T19:25:45.1563205Z Docker client API version: '1.48'
+2025-12-13T19:25:45.1569454Z ##[endgroup]
+2025-12-13T19:25:45.1572730Z ##[group]Clean up resources from previous jobs
+2025-12-13T19:25:45.1578614Z ##[command]/usr/bin/docker ps --all --quiet --no-trunc --filter "label=b6ebdb"
+2025-12-13T19:25:45.1728766Z ##[command]/usr/bin/docker network prune --force --filter "label=b6ebdb"
+2025-12-13T19:25:45.1868134Z ##[endgroup]
+2025-12-13T19:25:45.1868647Z ##[group]Create local container network
+2025-12-13T19:25:45.1879251Z ##[command]/usr/bin/docker network create --label b6ebdb github_network_f258ea148daa4a31b5b87a6a80f77e70
+2025-12-13T19:25:45.2425009Z ac04b2e4b033f178777f042609c1a97654427076ded71f5c2620d6ac38a28aec
+2025-12-13T19:25:45.2442561Z ##[endgroup]
+2025-12-13T19:25:45.2467220Z ##[group]Starting job container
+2025-12-13T19:25:45.2488151Z ##[command]/usr/bin/docker pull opensauce04/azahar-build-environment:latest
+2025-12-13T19:25:45.6531220Z latest: Pulling from opensauce04/azahar-build-environment
+2025-12-13T19:25:45.6533901Z 53c88f1dfeb7: Pulling fs layer
+2025-12-13T19:25:45.6534973Z a143e6df5343: Pulling fs layer
+2025-12-13T19:25:45.6535956Z 396fa16296ca: Pulling fs layer
+2025-12-13T19:25:45.6537069Z 390380327692: Pulling fs layer
+2025-12-13T19:25:45.6537819Z 967e46a66fda: Pulling fs layer
+2025-12-13T19:25:45.6539073Z ac307f3351ad: Pulling fs layer
+2025-12-13T19:25:45.6539739Z 5277f840c304: Pulling fs layer
+2025-12-13T19:25:45.6540514Z b841d94199ec: Pulling fs layer
+2025-12-13T19:25:45.6541483Z a34810f46779: Pulling fs layer
+2025-12-13T19:25:45.6542335Z f0f5a59db658: Pulling fs layer
+2025-12-13T19:25:45.6543032Z 70f500d534cb: Pulling fs layer
+2025-12-13T19:25:45.6543666Z 765bb94e5f81: Pulling fs layer
+2025-12-13T19:25:45.6544299Z ac634b4a05b8: Pulling fs layer
+2025-12-13T19:25:45.6544821Z 759608180880: Pulling fs layer
+2025-12-13T19:25:45.6545361Z f15b85db2ba3: Pulling fs layer
+2025-12-13T19:25:45.6545878Z 9549cfc817f7: Pulling fs layer
+2025-12-13T19:25:45.6546358Z b841d94199ec: Waiting
+2025-12-13T19:25:45.6547171Z a34810f46779: Waiting
+2025-12-13T19:25:45.6547668Z ac634b4a05b8: Waiting
+2025-12-13T19:25:45.6548111Z 759608180880: Waiting
+2025-12-13T19:25:45.6548564Z f0f5a59db658: Waiting
+2025-12-13T19:25:45.6549020Z 70f500d534cb: Waiting
+2025-12-13T19:25:45.6549471Z f15b85db2ba3: Waiting
+2025-12-13T19:25:45.6549936Z 765bb94e5f81: Waiting
+2025-12-13T19:25:45.6550367Z 9549cfc817f7: Waiting
+2025-12-13T19:25:45.6550824Z 390380327692: Waiting
+2025-12-13T19:25:45.6551265Z 967e46a66fda: Waiting
+2025-12-13T19:25:45.6551694Z ac307f3351ad: Waiting
+2025-12-13T19:25:45.6552209Z 5277f840c304: Waiting
+2025-12-13T19:25:45.7657218Z a143e6df5343: Download complete
+2025-12-13T19:25:45.9288367Z 396fa16296ca: Verifying Checksum
+2025-12-13T19:25:45.9289418Z 396fa16296ca: Download complete
+2025-12-13T19:25:46.0609917Z 967e46a66fda: Verifying Checksum
+2025-12-13T19:25:46.0611518Z 967e46a66fda: Download complete
+2025-12-13T19:25:46.1774816Z ac307f3351ad: Verifying Checksum
+2025-12-13T19:25:46.1778702Z ac307f3351ad: Download complete
+2025-12-13T19:25:46.2999440Z 5277f840c304: Verifying Checksum
+2025-12-13T19:25:46.4544846Z 5277f840c304: Download complete
+2025-12-13T19:25:46.4546114Z b841d94199ec: Verifying Checksum
+2025-12-13T19:25:46.4547197Z b841d94199ec: Download complete
+2025-12-13T19:25:46.5895465Z a34810f46779: Verifying Checksum
+2025-12-13T19:25:46.5896280Z a34810f46779: Download complete
+2025-12-13T19:25:46.6901717Z 53c88f1dfeb7: Download complete
+2025-12-13T19:25:46.7412013Z f0f5a59db658: Verifying Checksum
+2025-12-13T19:25:46.7413719Z f0f5a59db658: Download complete
+2025-12-13T19:25:47.0766493Z 765bb94e5f81: Verifying Checksum
+2025-12-13T19:25:47.0776467Z 765bb94e5f81: Download complete
+2025-12-13T19:25:47.2396463Z ac634b4a05b8: Verifying Checksum
+2025-12-13T19:25:47.2398960Z ac634b4a05b8: Download complete
+2025-12-13T19:25:47.3423178Z 70f500d534cb: Verifying Checksum
+2025-12-13T19:25:47.3423769Z 70f500d534cb: Download complete
+2025-12-13T19:25:47.5553296Z 759608180880: Verifying Checksum
+2025-12-13T19:25:47.5555342Z 759608180880: Download complete
+2025-12-13T19:25:47.5565148Z f15b85db2ba3: Verifying Checksum
+2025-12-13T19:25:47.5565585Z f15b85db2ba3: Download complete
+2025-12-13T19:25:47.6823496Z 9549cfc817f7: Verifying Checksum
+2025-12-13T19:25:47.6824292Z 9549cfc817f7: Download complete
+2025-12-13T19:25:48.4297649Z 53c88f1dfeb7: Pull complete
+2025-12-13T19:25:51.7769099Z a143e6df5343: Pull complete
+2025-12-13T19:25:52.0704001Z 396fa16296ca: Pull complete
+2025-12-13T19:25:56.5984815Z 390380327692: Verifying Checksum
+2025-12-13T19:25:56.5985303Z 390380327692: Download complete
+2025-12-13T19:26:20.9239296Z 390380327692: Pull complete
+2025-12-13T19:26:20.9334779Z 967e46a66fda: Pull complete
+2025-12-13T19:26:20.9430908Z ac307f3351ad: Pull complete
+2025-12-13T19:26:20.9521135Z 5277f840c304: Pull complete
+2025-12-13T19:26:20.9628404Z b841d94199ec: Pull complete
+2025-12-13T19:26:21.0261745Z a34810f46779: Pull complete
+2025-12-13T19:26:21.0920235Z f0f5a59db658: Pull complete
+2025-12-13T19:26:21.1744580Z 70f500d534cb: Pull complete
+2025-12-13T19:26:21.2327411Z 765bb94e5f81: Pull complete
+2025-12-13T19:26:21.2409989Z ac634b4a05b8: Pull complete
+2025-12-13T19:26:21.3242245Z 759608180880: Pull complete
+2025-12-13T19:26:21.3833139Z f15b85db2ba3: Pull complete
+2025-12-13T19:26:21.3910411Z 9549cfc817f7: Pull complete
+2025-12-13T19:26:21.3941401Z Digest: sha256:f5e6f22f56c6a1849b0f025af5328b444e60fca684a419ab3e862618a24687aa
+2025-12-13T19:26:21.3951853Z Status: Downloaded newer image for opensauce04/azahar-build-environment:latest
+2025-12-13T19:26:21.3962703Z docker.io/opensauce04/azahar-build-environment:latest
+2025-12-13T19:26:21.4041551Z ##[command]/usr/bin/docker create --name 2c90ced7b915478fb33e07566b90dc4d_opensauce04azaharbuildenvironmentlatest_6925d9 --label b6ebdb --workdir /__w/azahar_libretro/azahar_libretro --network github_network_f258ea148daa4a31b5b87a6a80f77e70 -u 1001 -e "HOME=/github/home" -e GITHUB_ACTIONS=true -e CI=true -v "/var/run/docker.sock":"/var/run/docker.sock" -v "/home/runner/work":"/__w" -v "/home/runner/actions-runner/cached/externals":"/__e":ro -v "/home/runner/work/_temp":"/__w/_temp" -v "/home/runner/work/_actions":"/__w/_actions" -v "/opt/hostedtoolcache":"/__t" -v "/home/runner/work/_temp/_github_home":"/github/home" -v "/home/runner/work/_temp/_github_workflow":"/github/workflow" --entrypoint "tail" opensauce04/azahar-build-environment:latest "-f" "/dev/null"
+2025-12-13T19:26:21.4285756Z afe50f02e45c03b903a70317424225d5eaf4a00f32a5548f7f7e7000236897a1
+2025-12-13T19:26:21.4310719Z ##[command]/usr/bin/docker start afe50f02e45c03b903a70317424225d5eaf4a00f32a5548f7f7e7000236897a1
+2025-12-13T19:26:21.6100341Z afe50f02e45c03b903a70317424225d5eaf4a00f32a5548f7f7e7000236897a1
+2025-12-13T19:26:21.6123689Z ##[command]/usr/bin/docker ps --all --filter id=afe50f02e45c03b903a70317424225d5eaf4a00f32a5548f7f7e7000236897a1 --filter status=running --no-trunc --format "{{.ID}} {{.Status}}"
+2025-12-13T19:26:21.6244152Z afe50f02e45c03b903a70317424225d5eaf4a00f32a5548f7f7e7000236897a1 Up Less than a second
+2025-12-13T19:26:21.6263413Z ##[command]/usr/bin/docker inspect --format "{{range .Config.Env}}{{println .}}{{end}}" afe50f02e45c03b903a70317424225d5eaf4a00f32a5548f7f7e7000236897a1
+2025-12-13T19:26:21.6382446Z HOME=/github/home
+2025-12-13T19:26:21.6382803Z GITHUB_ACTIONS=true
+2025-12-13T19:26:21.6383271Z CI=true
+2025-12-13T19:26:21.6383725Z PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+2025-12-13T19:26:21.6384269Z DEBIAN_FRONTEND=noninteractive
+2025-12-13T19:26:21.6403658Z ##[endgroup]
+2025-12-13T19:26:21.6412694Z ##[group]Waiting for all services to be ready
+2025-12-13T19:26:21.6414465Z ##[endgroup]
+2025-12-13T19:26:21.6679195Z ##[group]Run actions/checkout@v4
+2025-12-13T19:26:21.6679724Z with:
+2025-12-13T19:26:21.6679908Z   fetch-depth: 0
+2025-12-13T19:26:21.6680113Z   repository: JohnDoe6345789/azahar_libretro
+2025-12-13T19:26:21.6680545Z   token: ***
+2025-12-13T19:26:21.6680722Z   ssh-strict: true
+2025-12-13T19:26:21.6680896Z   ssh-user: git
+2025-12-13T19:26:21.6681087Z   persist-credentials: true
+2025-12-13T19:26:21.6681291Z   clean: true
+2025-12-13T19:26:21.6681484Z   sparse-checkout-cone-mode: true
+2025-12-13T19:26:21.6681705Z   fetch-tags: false
+2025-12-13T19:26:21.6681884Z   show-progress: true
+2025-12-13T19:26:21.6682057Z   lfs: false
+2025-12-13T19:26:21.6682217Z   submodules: false
+2025-12-13T19:26:21.6682414Z   set-safe-directory: true
+2025-12-13T19:26:21.6682787Z ##[endgroup]
+2025-12-13T19:26:21.6738771Z ##[command]/usr/bin/docker exec  afe50f02e45c03b903a70317424225d5eaf4a00f32a5548f7f7e7000236897a1 sh -c "cat /etc/*release | grep ^ID"
+2025-12-13T19:26:21.8893440Z Syncing repository: JohnDoe6345789/azahar_libretro
+2025-12-13T19:26:21.8895459Z ##[group]Getting Git version info
+2025-12-13T19:26:21.8896080Z Working directory is '/__w/azahar_libretro/azahar_libretro'
+2025-12-13T19:26:21.8897255Z [command]/usr/bin/git version
+2025-12-13T19:26:21.8897649Z git version 2.47.3
+2025-12-13T19:26:21.8913502Z ##[endgroup]
+2025-12-13T19:26:21.8929103Z Temporarily overriding HOME='/__w/_temp/677268ef-bf77-43b7-a8e5-538bb081e7a0' before making global git config changes
+2025-12-13T19:26:21.8930250Z Adding repository directory to the temporary git global config as a safe directory
+2025-12-13T19:26:21.8936134Z [command]/usr/bin/git config --global --add safe.directory /__w/azahar_libretro/azahar_libretro
+2025-12-13T19:26:21.8972140Z Deleting the contents of '/__w/azahar_libretro/azahar_libretro'
+2025-12-13T19:26:21.8976062Z ##[group]Initializing the repository
+2025-12-13T19:26:21.8980329Z [command]/usr/bin/git init /__w/azahar_libretro/azahar_libretro
+2025-12-13T19:26:21.9018821Z hint: Using 'master' as the name for the initial branch. This default branch name
+2025-12-13T19:26:21.9021096Z hint: is subject to change. To configure the initial branch name to use in all
+2025-12-13T19:26:21.9021943Z hint: of your new repositories, which will suppress this warning, call:
+2025-12-13T19:26:21.9022494Z hint:
+2025-12-13T19:26:21.9022786Z hint: 	git config --global init.defaultBranch <name>
+2025-12-13T19:26:21.9023061Z hint:
+2025-12-13T19:26:21.9023313Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2025-12-13T19:26:21.9023758Z hint: 'development'. The just-created branch can be renamed via this command:
+2025-12-13T19:26:21.9024104Z hint:
+2025-12-13T19:26:21.9024279Z hint: 	git branch -m <name>
+2025-12-13T19:26:21.9024638Z Initialized empty Git repository in /__w/azahar_libretro/azahar_libretro/.git/
+2025-12-13T19:26:21.9033118Z [command]/usr/bin/git remote add origin https://github.com/JohnDoe6345789/azahar_libretro
+2025-12-13T19:26:21.9061929Z ##[endgroup]
+2025-12-13T19:26:21.9062591Z ##[group]Disabling automatic garbage collection
+2025-12-13T19:26:21.9066226Z [command]/usr/bin/git config --local gc.auto 0
+2025-12-13T19:26:21.9094444Z ##[endgroup]
+2025-12-13T19:26:21.9094798Z ##[group]Setting up auth
+2025-12-13T19:26:21.9100613Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2025-12-13T19:26:21.9128539Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2025-12-13T19:26:21.9371191Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-12-13T19:26:21.9401202Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2025-12-13T19:26:21.9632328Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2025-12-13T19:26:21.9662482Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2025-12-13T19:26:21.9892445Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2025-12-13T19:26:21.9928055Z ##[endgroup]
+2025-12-13T19:26:21.9928660Z ##[group]Fetching the repository
+2025-12-13T19:26:21.9937135Z [command]/usr/bin/git -c protocol.version=2 fetch --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/*
+2025-12-13T19:26:25.7927131Z From https://github.com/JohnDoe6345789/azahar_libretro
+2025-12-13T19:26:25.7927917Z  * [new branch]          master      -> origin/master
+2025-12-13T19:26:25.7928532Z  * [new tag]             2120        -> 2120
+2025-12-13T19:26:25.7929016Z  * [new tag]             2120-rc1    -> 2120-rc1
+2025-12-13T19:26:25.7931690Z  * [new tag]             2120-rc2    -> 2120-rc2
+2025-12-13T19:26:25.7932773Z  * [new tag]             2120-rc3    -> 2120-rc3
+2025-12-13T19:26:25.7933890Z  * [new tag]             2120.1      -> 2120.1
+2025-12-13T19:26:25.7937101Z  * [new tag]             2120.2      -> 2120.2
+2025-12-13T19:26:25.7937976Z  * [new tag]             2120.3      -> 2120.3
+2025-12-13T19:26:25.7942769Z  * [new tag]             2121        -> 2121
+2025-12-13T19:26:25.7943415Z  * [new tag]             2121-rc1    -> 2121-rc1
+2025-12-13T19:26:25.7943905Z  * [new tag]             2121.1      -> 2121.1
+2025-12-13T19:26:25.7944346Z  * [new tag]             2121.2      -> 2121.2
+2025-12-13T19:26:25.7944781Z  * [new tag]             2122        -> 2122
+2025-12-13T19:26:25.7946303Z  * [new tag]             2122-alpha1 -> 2122-alpha1
+2025-12-13T19:26:25.7948472Z  * [new tag]             2122-rc1    -> 2122-rc1
+2025-12-13T19:26:25.7948978Z  * [new tag]             2122-rc2    -> 2122-rc2
+2025-12-13T19:26:25.7950019Z  * [new tag]             2122.1      -> 2122.1
+2025-12-13T19:26:25.7988480Z [command]/usr/bin/git branch --list --remote origin/master
+2025-12-13T19:26:25.8025636Z   origin/master
+2025-12-13T19:26:25.8034862Z [command]/usr/bin/git rev-parse refs/remotes/origin/master
+2025-12-13T19:26:25.8055776Z 7879ccf14e6f47235c345945d6444c926352db46
+2025-12-13T19:26:25.8061166Z ##[endgroup]
+2025-12-13T19:26:25.8065750Z ##[group]Determining the checkout info
+2025-12-13T19:26:25.8066497Z ##[endgroup]
+2025-12-13T19:26:25.8068141Z [command]/usr/bin/git sparse-checkout disable
+2025-12-13T19:26:25.8105982Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2025-12-13T19:26:25.8132768Z ##[group]Checking out the ref
+2025-12-13T19:26:25.8136875Z [command]/usr/bin/git checkout --progress --force -B master refs/remotes/origin/master
+2025-12-13T19:26:26.0388393Z Reset branch 'master'
+2025-12-13T19:26:26.0389930Z branch 'master' set up to track 'origin/master'.
+2025-12-13T19:26:26.0418646Z ##[endgroup]
+2025-12-13T19:26:26.0461216Z [command]/usr/bin/git log -1 --format=%H
+2025-12-13T19:26:26.0484388Z 7879ccf14e6f47235c345945d6444c926352db46
+2025-12-13T19:26:26.0714018Z ##[group]Run ./.ci/clang-format.sh
+2025-12-13T19:26:26.0714348Z [36;1m./.ci/clang-format.sh[0m
+2025-12-13T19:26:26.0717657Z shell: sh -e {0}
+2025-12-13T19:26:26.0717853Z env:
+2025-12-13T19:26:26.0718023Z   COMMIT_RANGE: ..
+2025-12-13T19:26:26.0718198Z ##[endgroup]
+2025-12-13T19:26:26.1273343Z + grep -nrI '\s$' src '*.yml' CMakeLists.txt license.txt CONTRIBUTING.md README.md Doxyfile .gitignore .gitmodules .ci dist/azahar-room.desktop dist/azahar.desktop dist/azahar.svg dist/org.azahar_emu.Azahar.xml
+2025-12-13T19:26:26.1751742Z grep: *.yml: No such file or directory
+2025-12-13T19:26:26.1752997Z src/android/app/src/main/java/org/citra/citra_emu/overlay/InputOverlay.kt:1062:          
+2025-12-13T19:26:26.1754301Z src/android/app/src/main/java/org/citra/citra_emu/overlay/InputOverlay.kt:1125:            
+2025-12-13T19:26:26.1755336Z src/android/app/src/main/java/org/citra/citra_emu/overlay/InputOverlay.kt:1127:          
+2025-12-13T19:26:26.1756964Z src/android/app/src/main/java/org/citra/citra_emu/features/settings/model/BooleanSetting.kt:74:            ALLOW_PLUGIN_LOADER, 
+2025-12-13T19:26:26.1758903Z README.md:3:(Lib retro edition) 
+2025-12-13T19:26:26.1759679Z dist/azahar.svg:2:<!-- 
+2025-12-13T19:26:26.1761652Z + CLANG_FORMAT=clang-format
+2025-12-13T19:26:26.1762055Z + clang-format --version
+2025-12-13T19:26:26.1925454Z Debian clang-format version 19.1.7 (3+b1)
+2025-12-13T19:26:26.1955970Z + '[' push = pull_request ']'
+2025-12-13T19:26:26.1959382Z ++ find src/ -name '*.cpp' -or -name '*.h'
+2025-12-13T19:26:26.2033748Z + files_to_lint='src/network/precompiled_headers.h
+2025-12-13T19:26:26.2034302Z src/network/announce_multiplayer_session.cpp
+2025-12-13T19:26:26.2035059Z src/network/room_member.h
+2025-12-13T19:26:26.2035442Z src/network/room_member.cpp
+2025-12-13T19:26:26.2035861Z src/network/announce_multiplayer_session.h
+2025-12-13T19:26:26.2036384Z src/network/network_settings.h
+2025-12-13T19:26:26.2037035Z src/network/artic_base/artic_base_client.h
+2025-12-13T19:26:26.2037555Z src/network/artic_base/artic_base_common.h
+2025-12-13T19:26:26.2038020Z src/network/artic_base/artic_base_client.cpp
+2025-12-13T19:26:26.2038332Z src/network/network.cpp
+2025-12-13T19:26:26.2038557Z src/network/socket_manager.h
+2025-12-13T19:26:26.2038785Z src/network/verify_user.cpp
+2025-12-13T19:26:26.2039006Z src/network/network.h
+2025-12-13T19:26:26.2039299Z src/network/network_settings.cpp
+2025-12-13T19:26:26.2039677Z src/network/room.h
+2025-12-13T19:26:26.2039980Z src/network/packet.h
+2025-12-13T19:26:26.2040306Z src/network/room.cpp
+2025-12-13T19:26:26.2040625Z src/network/socket_manager.cpp
+2025-12-13T19:26:26.2040974Z src/network/packet.cpp
+2025-12-13T19:26:26.2041289Z src/network/verify_user.h
+2025-12-13T19:26:26.2042024Z src/citra_room/precompiled_headers.h
+2025-12-13T19:26:26.2042426Z src/citra_room/citra_room.cpp
+2025-12-13T19:26:26.2042773Z src/citra_room/citra_room.h
+2025-12-13T19:26:26.2043139Z src/android/app/src/main/jni/ndk_motion.cpp
+2025-12-13T19:26:26.2043493Z src/android/app/src/main/jni/input_manager.cpp
+2025-12-13T19:26:26.2043777Z src/android/app/src/main/jni/config.cpp
+2025-12-13T19:26:26.2118157Z src/android/app/src/main/jni/input_manager.h
+2025-12-13T19:26:26.2118645Z src/android/app/src/main/jni/ndk_motion.h
+2025-12-13T19:26:26.2119122Z src/android/app/src/main/jni/android_common/android_common.cpp
+2025-12-13T19:26:26.2119591Z src/android/app/src/main/jni/android_common/android_common.h
+2025-12-13T19:26:26.2119979Z src/android/app/src/main/jni/applets/mii_selector.cpp
+2025-12-13T19:26:26.2120291Z src/android/app/src/main/jni/applets/swkbd.h
+2025-12-13T19:26:26.2120565Z src/android/app/src/main/jni/applets/swkbd.cpp
+2025-12-13T19:26:26.2120860Z src/android/app/src/main/jni/applets/mii_selector.h
+2025-12-13T19:26:26.2121185Z src/android/app/src/main/jni/default_ini.h
+2025-12-13T19:26:26.2121466Z src/android/app/src/main/jni/native_log.cpp
+2025-12-13T19:26:26.2121714Z src/android/app/src/main/jni/config.h
+2025-12-13T19:26:26.2121964Z src/android/app/src/main/jni/id_cache.cpp
+2025-12-13T19:26:26.2122647Z src/android/app/src/main/jni/camera/still_image_camera.cpp
+2025-12-13T19:26:26.2123014Z src/android/app/src/main/jni/camera/still_image_camera.h
+2025-12-13T19:26:26.2123340Z src/android/app/src/main/jni/camera/ndk_camera.h
+2025-12-13T19:26:26.2123635Z src/android/app/src/main/jni/camera/ndk_camera.cpp
+2025-12-13T19:26:26.2123926Z src/android/app/src/main/jni/cheats/cheat.cpp
+2025-12-13T19:26:26.2124217Z src/android/app/src/main/jni/cheats/cheat_engine.cpp
+2025-12-13T19:26:26.2124534Z src/android/app/src/main/jni/cheats/cheat.h
+2025-12-13T19:26:26.2124859Z src/android/app/src/main/jni/id_cache.h
+2025-12-13T19:26:26.2125164Z src/android/app/src/main/jni/util.cpp
+2025-12-13T19:26:26.2125416Z src/android/app/src/main/jni/native.cpp
+2025-12-13T19:26:26.2125683Z src/android/app/src/main/jni/emu_window/emu_window.h
+2025-12-13T19:26:26.2126012Z src/android/app/src/main/jni/emu_window/emu_window_vk.cpp
+2025-12-13T19:26:26.2126353Z src/android/app/src/main/jni/emu_window/emu_window_gl.cpp
+2025-12-13T19:26:26.2127176Z src/android/app/src/main/jni/emu_window/emu_window_vk.h
+2025-12-13T19:26:26.2127748Z src/android/app/src/main/jni/emu_window/emu_window_gl.h
+2025-12-13T19:26:26.2128321Z src/android/app/src/main/jni/emu_window/emu_window.cpp
+2025-12-13T19:26:26.2128690Z src/android/app/src/main/jni/system_save_game.cpp
+2025-12-13T19:26:26.2128970Z src/android/app/src/main/jni/game_info.cpp
+2025-12-13T19:26:26.2129221Z src/android/app/src/main/jni/util.h
+2025-12-13T19:26:26.2129448Z src/citra_qt/qt_swizzle.h
+2025-12-13T19:26:26.2129668Z src/citra_qt/precompiled_headers.h
+2025-12-13T19:26:26.2129906Z src/citra_qt/qt_image_interface.h
+2025-12-13T19:26:26.2130143Z src/citra_qt/qt_image_interface.cpp
+2025-12-13T19:26:26.2130388Z src/citra_qt/dumping/dumping_dialog.h
+2025-12-13T19:26:26.2130631Z src/citra_qt/dumping/option_set_dialog.cpp
+2025-12-13T19:26:26.2130894Z src/citra_qt/dumping/option_set_dialog.h
+2025-12-13T19:26:26.2131135Z src/citra_qt/dumping/options_dialog.h
+2025-12-13T19:26:26.2131387Z src/citra_qt/dumping/dumping_dialog.cpp
+2025-12-13T19:26:26.2131626Z src/citra_qt/dumping/options_dialog.cpp
+2025-12-13T19:26:26.2131864Z src/citra_qt/compatibility_list.cpp
+2025-12-13T19:26:26.2132098Z src/citra_qt/bootmanager.cpp
+2025-12-13T19:26:26.2132309Z src/citra_qt/game_list_worker.cpp
+2025-12-13T19:26:26.2132532Z src/citra_qt/update_checker.h
+2025-12-13T19:26:26.2132734Z src/citra_qt/citra_qt.h
+2025-12-13T19:26:26.2132938Z src/citra_qt/compatibility_list.h
+2025-12-13T19:26:26.2133162Z src/citra_qt/applets/mii_selector.cpp
+2025-12-13T19:26:26.2133394Z src/citra_qt/applets/swkbd.h
+2025-12-13T19:26:26.2133597Z src/citra_qt/applets/swkbd.cpp
+2025-12-13T19:26:26.2133818Z src/citra_qt/applets/mii_selector.h
+2025-12-13T19:26:26.2134251Z src/citra_qt/configuration/configure_dialog.cpp
+2025-12-13T19:26:26.2134538Z src/citra_qt/configuration/configure_debug.h
+2025-12-13T19:26:26.2134817Z src/citra_qt/configuration/configure_graphics.h
+2025-12-13T19:26:26.2135094Z src/citra_qt/configuration/configure_storage.cpp
+2025-12-13T19:26:26.2135373Z src/citra_qt/configuration/config.cpp
+2025-12-13T19:26:26.2135658Z src/citra_qt/configuration/configure_touch_from_button.cpp
+2025-12-13T19:26:26.2135999Z src/citra_qt/configuration/configure_cheats.h
+2025-12-13T19:26:26.2136272Z src/citra_qt/configuration/configure_storage.h
+2025-12-13T19:26:26.2136548Z src/citra_qt/configuration/configure_system.h
+2025-12-13T19:26:26.2137031Z src/citra_qt/configuration/configure_audio.cpp
+2025-12-13T19:26:26.2137304Z src/citra_qt/configuration/configure_input.h
+2025-12-13T19:26:26.2137681Z src/citra_qt/configuration/configure_layout.h
+2025-12-13T19:26:26.2137949Z src/citra_qt/configuration/configure_web.cpp
+2025-12-13T19:26:26.2138217Z src/citra_qt/configuration/configure_general.h
+2025-12-13T19:26:26.2138528Z src/citra_qt/configuration/configure_motion_touch.h
+2025-12-13T19:26:26.2138822Z src/citra_qt/configuration/configure_camera.h
+2025-12-13T19:26:26.2139104Z src/citra_qt/configuration/configure_hotkeys.h
+2025-12-13T19:26:26.2139547Z src/citra_qt/configuration/configure_audio.h
+2025-12-13T19:26:26.2139820Z src/citra_qt/configuration/configure_per_game.h
+2025-12-13T19:26:26.2140083Z src/citra_qt/configuration/config.h
+2025-12-13T19:26:26.2140378Z src/citra_qt/configuration/configure_touch_from_button.h
+2025-12-13T19:26:26.2140676Z src/citra_qt/configuration/configure_input.cpp
+2025-12-13T19:26:26.2140949Z src/citra_qt/configuration/configure_ui.cpp
+2025-12-13T19:26:26.2141228Z src/citra_qt/configuration/configure_enhancements.h
+2025-12-13T19:26:26.2141524Z src/citra_qt/configuration/configure_general.cpp
+2025-12-13T19:26:26.2141808Z src/citra_qt/configuration/configure_per_game.cpp
+2025-12-13T19:26:26.2142102Z src/citra_qt/configuration/configure_touch_widget.h
+2025-12-13T19:26:26.2142378Z src/citra_qt/configuration/configure_ui.h
+2025-12-13T19:26:26.2142655Z src/citra_qt/configuration/configure_system.cpp
+2025-12-13T19:26:26.2142945Z src/citra_qt/configuration/configure_graphics.cpp
+2025-12-13T19:26:26.2143238Z src/citra_qt/configuration/configuration_shared.h
+2025-12-13T19:26:26.2143519Z src/citra_qt/configuration/configure_dialog.h
+2025-12-13T19:26:26.2143783Z src/citra_qt/configuration/configure_layout.cpp
+2025-12-13T19:26:26.2144069Z src/citra_qt/configuration/configuration_shared.cpp
+2025-12-13T19:26:26.2144371Z src/citra_qt/configuration/configure_enhancements.cpp
+2025-12-13T19:26:26.2144685Z src/citra_qt/configuration/configure_motion_touch.cpp
+2025-12-13T19:26:26.2144971Z src/citra_qt/configuration/configure_debug.cpp
+2025-12-13T19:26:26.2145240Z src/citra_qt/configuration/configure_web.h
+2025-12-13T19:26:26.2145506Z src/citra_qt/configuration/configure_cheats.cpp
+2025-12-13T19:26:26.2145775Z src/citra_qt/configuration/configure_camera.cpp
+2025-12-13T19:26:26.2146058Z src/citra_qt/configuration/configure_hotkeys.cpp
+2025-12-13T19:26:26.2146321Z src/citra_qt/debugger/profiler.h
+2025-12-13T19:26:26.2146548Z src/citra_qt/debugger/registers.h
+2025-12-13T19:26:26.2147028Z src/citra_qt/debugger/wait_tree.cpp
+2025-12-13T19:26:26.2147392Z src/citra_qt/debugger/wait_tree.h
+2025-12-13T19:26:26.2147644Z src/citra_qt/debugger/graphics/graphics_tracing.cpp
+2025-12-13T19:26:26.2147985Z src/citra_qt/debugger/graphics/graphics_breakpoint_observer.cpp
+2025-12-13T19:26:26.2148351Z src/citra_qt/debugger/graphics/graphics_breakpoints.cpp
+2025-12-13T19:26:26.2148643Z src/citra_qt/debugger/graphics/graphics.cpp
+2025-12-13T19:26:26.2148951Z src/citra_qt/debugger/graphics/graphics_vertex_shader.cpp
+2025-12-13T19:26:26.2149274Z src/citra_qt/debugger/graphics/graphics_breakpoints.h
+2025-12-13T19:26:26.2149584Z src/citra_qt/debugger/graphics/graphics_cmdlists.h
+2025-12-13T19:26:26.2149875Z src/citra_qt/debugger/graphics/graphics_tracing.h
+2025-12-13T19:26:26.2150167Z src/citra_qt/debugger/graphics/graphics_surface.h
+2025-12-13T19:26:26.2150613Z src/citra_qt/debugger/graphics/graphics_vertex_shader.h
+2025-12-13T19:26:26.2150927Z src/citra_qt/debugger/graphics/graphics_cmdlists.cpp
+2025-12-13T19:26:26.2151269Z src/citra_qt/debugger/graphics/graphics_breakpoint_observer.h
+2025-12-13T19:26:26.2151616Z src/citra_qt/debugger/graphics/graphics_breakpoints_p.h
+2025-12-13T19:26:26.2151915Z src/citra_qt/debugger/graphics/graphics.h
+2025-12-13T19:26:26.2152189Z src/citra_qt/debugger/graphics/graphics_surface.cpp
+2025-12-13T19:26:26.2152473Z src/citra_qt/debugger/lle_service_modules.h
+2025-12-13T19:26:26.2152730Z src/citra_qt/debugger/profiler.cpp
+2025-12-13T19:26:26.2152967Z src/citra_qt/debugger/registers.cpp
+2025-12-13T19:26:26.2153215Z src/citra_qt/debugger/ipc/record_dialog.cpp
+2025-12-13T19:26:26.2153462Z src/citra_qt/debugger/ipc/record_dialog.h
+2025-12-13T19:26:26.2153710Z src/citra_qt/debugger/ipc/recorder.h
+2025-12-13T19:26:26.2153945Z src/citra_qt/debugger/ipc/recorder.cpp
+2025-12-13T19:26:26.2154208Z src/citra_qt/debugger/lle_service_modules.cpp
+2025-12-13T19:26:26.2154460Z src/citra_qt/debugger/console.h
+2025-12-13T19:26:26.2154681Z src/citra_qt/debugger/console.cpp
+2025-12-13T19:26:26.2154895Z src/citra_qt/citra_qt.cpp
+2025-12-13T19:26:26.2155105Z src/citra_qt/aboutdialog.cpp
+2025-12-13T19:26:26.2155430Z src/citra_qt/user_data_migration.cpp
+2025-12-13T19:26:26.2155662Z src/citra_qt/discord.h
+2025-12-13T19:26:26.2155865Z src/citra_qt/multiplayer/state.h
+2025-12-13T19:26:26.2156099Z src/citra_qt/multiplayer/moderation_dialog.h
+2025-12-13T19:26:26.2156361Z src/citra_qt/multiplayer/direct_connect.h
+2025-12-13T19:26:26.2156602Z src/citra_qt/multiplayer/client_room.h
+2025-12-13T19:26:26.2157181Z src/citra_qt/multiplayer/validation.h
+2025-12-13T19:26:26.2157420Z src/citra_qt/multiplayer/host_room.cpp
+2025-12-13T19:26:26.2157665Z src/citra_qt/multiplayer/client_room.cpp
+2025-12-13T19:26:26.2157907Z src/citra_qt/multiplayer/state.cpp
+2025-12-13T19:26:26.2158142Z src/citra_qt/multiplayer/lobby.cpp
+2025-12-13T19:26:26.2158403Z src/citra_qt/multiplayer/moderation_dialog.cpp
+2025-12-13T19:26:26.2158660Z src/citra_qt/multiplayer/chat_room.cpp
+2025-12-13T19:26:26.2158900Z src/citra_qt/multiplayer/message.cpp
+2025-12-13T19:26:26.2159128Z src/citra_qt/multiplayer/message.h
+2025-12-13T19:26:26.2159366Z src/citra_qt/multiplayer/direct_connect.cpp
+2025-12-13T19:26:26.2159605Z src/citra_qt/multiplayer/lobby_p.h
+2025-12-13T19:26:26.2159829Z src/citra_qt/multiplayer/host_room.h
+2025-12-13T19:26:26.2160059Z src/citra_qt/multiplayer/chat_room.h
+2025-12-13T19:26:26.2160286Z src/citra_qt/multiplayer/lobby.h
+2025-12-13T19:26:26.2160504Z src/citra_qt/discord_impl.h
+2025-12-13T19:26:26.2160707Z src/citra_qt/game_list_p.h
+2025-12-13T19:26:26.2160906Z src/citra_qt/game_list.h
+2025-12-13T19:26:26.2161099Z src/citra_qt/user_data_migration.h
+2025-12-13T19:26:26.2161350Z src/citra_qt/camera/camera_util.cpp
+2025-12-13T19:26:26.2161578Z src/citra_qt/camera/camera_util.h
+2025-12-13T19:26:26.2161791Z src/citra_qt/camera/qt_camera_base.h
+2025-12-13T19:26:26.2162029Z src/citra_qt/camera/still_image_camera.cpp
+2025-12-13T19:26:26.2162276Z src/citra_qt/camera/qt_multimedia_camera.h
+2025-12-13T19:26:26.2162528Z src/citra_qt/camera/qt_multimedia_camera.cpp
+2025-12-13T19:26:26.2162782Z src/citra_qt/camera/still_image_camera.h
+2025-12-13T19:26:26.2163023Z src/citra_qt/camera/qt_camera_base.cpp
+2025-12-13T19:26:26.2163253Z src/citra_qt/discord_impl.cpp
+2025-12-13T19:26:26.2163458Z src/citra_qt/aboutdialog.h
+2025-12-13T19:26:26.2163658Z src/citra_qt/game_list.cpp
+2025-12-13T19:26:26.2163844Z src/citra_qt/bootmanager.h
+2025-12-13T19:26:26.2164039Z src/citra_qt/uisettings.cpp
+2025-12-13T19:26:26.2164229Z src/citra_qt/hotkeys.h
+2025-12-13T19:26:26.2164422Z src/citra_qt/game_list_worker.h
+2025-12-13T19:26:26.2164643Z src/citra_qt/movie/movie_record_dialog.cpp
+2025-12-13T19:26:26.2164891Z src/citra_qt/movie/movie_play_dialog.cpp
+2025-12-13T19:26:26.2165138Z src/citra_qt/movie/movie_play_dialog.h
+2025-12-13T19:26:26.2165369Z src/citra_qt/movie/movie_record_dialog.h
+2025-12-13T19:26:26.2165740Z src/citra_qt/uisettings.h
+2025-12-13T19:26:26.2165934Z src/citra_qt/loading_screen.h
+2025-12-13T19:26:26.2166146Z src/citra_qt/update_checker.cpp
+2025-12-13T19:26:26.2166349Z src/citra_qt/util/spinbox.h
+2025-12-13T19:26:26.2166570Z src/citra_qt/util/graphics_device_info.h
+2025-12-13T19:26:26.2167093Z src/citra_qt/util/clickable_label.h
+2025-12-13T19:26:26.2167336Z src/citra_qt/util/graphics_device_info.cpp
+2025-12-13T19:26:26.2167589Z src/citra_qt/util/clickable_label.cpp
+2025-12-13T19:26:26.2167866Z src/citra_qt/util/sequence_dialog/sequence_dialog.cpp
+2025-12-13T19:26:26.2168182Z src/citra_qt/util/sequence_dialog/sequence_dialog.h
+2025-12-13T19:26:26.2168447Z src/citra_qt/util/spinbox.cpp
+2025-12-13T19:26:26.2168657Z src/citra_qt/util/util.cpp
+2025-12-13T19:26:26.2168850Z src/citra_qt/util/util.h
+2025-12-13T19:26:26.2169046Z src/citra_qt/hotkeys.cpp
+2025-12-13T19:26:26.2169234Z src/citra_qt/loading_screen.cpp
+2025-12-13T19:26:26.2169459Z src/web_service/precompiled_headers.h
+2025-12-13T19:26:26.2169700Z src/web_service/announce_room_json.cpp
+2025-12-13T19:26:26.2169934Z src/web_service/verify_user_jwt.h
+2025-12-13T19:26:26.2170157Z src/web_service/web_backend.h
+2025-12-13T19:26:26.2170362Z src/web_service/announce_room_json.h
+2025-12-13T19:26:26.2170722Z src/web_service/verify_login.h
+2025-12-13T19:26:26.2170936Z src/web_service/web_backend.cpp
+2025-12-13T19:26:26.2171152Z src/web_service/verify_login.cpp
+2025-12-13T19:26:26.2171366Z src/web_service/verify_user_jwt.cpp
+2025-12-13T19:26:26.2171597Z src/citra_meta/precompiled_headers.h
+2025-12-13T19:26:26.2171821Z src/citra_meta/common_strings.h
+2025-12-13T19:26:26.2172030Z src/citra_meta/main.cpp
+2025-12-13T19:26:26.2172255Z src/citra_room_standalone/citra_room_standalone.cpp
+2025-12-13T19:26:26.2172529Z src/core/precompiled_headers.h
+2025-12-13T19:26:26.2172729Z src/core/movie.h
+2025-12-13T19:26:26.2172906Z src/core/dumping/ffmpeg_backend.cpp
+2025-12-13T19:26:26.2173136Z src/core/dumping/ffmpeg_backend.h
+2025-12-13T19:26:26.2173356Z src/core/dumping/backend.cpp
+2025-12-13T19:26:26.2173564Z src/core/dumping/backend.h
+2025-12-13T19:26:26.2173756Z src/core/core_timing.cpp
+2025-12-13T19:26:26.2173948Z src/core/tracer/citrace.h
+2025-12-13T19:26:26.2174135Z src/core/tracer/recorder.h
+2025-12-13T19:26:26.2174336Z src/core/tracer/recorder.cpp
+2025-12-13T19:26:26.2174562Z src/core/arm/dynarmic/arm_exclusive_monitor.h
+2025-12-13T19:26:26.2174843Z src/core/arm/dynarmic/arm_exclusive_monitor.cpp
+2025-12-13T19:26:26.2175115Z src/core/arm/dynarmic/arm_tick_counts.h
+2025-12-13T19:26:26.2175358Z src/core/arm/dynarmic/arm_dynarmic_cp15.cpp
+2025-12-13T19:26:26.2175612Z src/core/arm/dynarmic/arm_dynarmic_cp15.h
+2025-12-13T19:26:26.2175851Z src/core/arm/dynarmic/arm_dynarmic.cpp
+2025-12-13T19:26:26.2176091Z src/core/arm/dynarmic/arm_tick_counts.cpp
+2025-12-13T19:26:26.2176328Z src/core/arm/dynarmic/arm_dynarmic.h
+2025-12-13T19:26:26.2176558Z src/core/arm/skyeye_common/armstate.cpp
+2025-12-13T19:26:26.2176929Z src/core/arm/skyeye_common/armsupp.cpp
+2025-12-13T19:26:26.2177175Z src/core/arm/skyeye_common/arm_regformat.h
+2025-12-13T19:26:26.2177418Z src/core/arm/skyeye_common/armstate.h
+2025-12-13T19:26:26.2177654Z src/core/arm/skyeye_common/armsupp.h
+2025-12-13T19:26:26.2177899Z src/core/arm/skyeye_common/vfp/vfpsingle.cpp
+2025-12-13T19:26:26.2178158Z src/core/arm/skyeye_common/vfp/asm_vfp.h
+2025-12-13T19:26:26.2178398Z src/core/arm/skyeye_common/vfp/vfp.h
+2025-12-13T19:26:26.2178631Z src/core/arm/skyeye_common/vfp/vfpinstr.cpp
+2025-12-13T19:26:26.2178887Z src/core/arm/skyeye_common/vfp/vfp_helper.h
+2025-12-13T19:26:26.2179129Z src/core/arm/skyeye_common/vfp/vfp.cpp
+2025-12-13T19:26:26.2179375Z src/core/arm/skyeye_common/vfp/vfpdouble.cpp
+2025-12-13T19:26:26.2179617Z src/core/arm/exclusive_monitor.h
+2025-12-13T19:26:26.2179842Z src/core/arm/dyncom/arm_dyncom_thumb.cpp
+2025-12-13T19:26:26.2180085Z src/core/arm/dyncom/arm_dyncom_trans.h
+2025-12-13T19:26:26.2180313Z src/core/arm/dyncom/arm_dyncom_thumb.h
+2025-12-13T19:26:26.2180549Z src/core/arm/dyncom/arm_dyncom_trans.cpp
+2025-12-13T19:26:26.2180927Z src/core/arm/dyncom/arm_dyncom_interpreter.cpp
+2025-12-13T19:26:26.2181182Z src/core/arm/dyncom/arm_dyncom_run.h
+2025-12-13T19:26:26.2181399Z src/core/arm/dyncom/arm_dyncom.h
+2025-12-13T19:26:26.2181615Z src/core/arm/dyncom/arm_dyncom_dec.h
+2025-12-13T19:26:26.2181838Z src/core/arm/dyncom/arm_dyncom.cpp
+2025-12-13T19:26:26.2182082Z src/core/arm/dyncom/arm_dyncom_interpreter.h
+2025-12-13T19:26:26.2182326Z src/core/arm/dyncom/arm_dyncom_dec.cpp
+2025-12-13T19:26:26.2182557Z src/core/arm/arm_interface.h
+2025-12-13T19:26:26.2182769Z src/core/arm/exclusive_monitor.cpp
+2025-12-13T19:26:26.2182982Z src/core/savestate.h
+2025-12-13T19:26:26.2183174Z src/core/loader/artic.cpp
+2025-12-13T19:26:26.2183367Z src/core/loader/ncch.h
+2025-12-13T19:26:26.2183555Z src/core/loader/loader.h
+2025-12-13T19:26:26.2183744Z src/core/loader/loader.cpp
+2025-12-13T19:26:26.2183940Z src/core/loader/smdh.cpp
+2025-12-13T19:26:26.2184123Z src/core/loader/3dsx.h
+2025-12-13T19:26:26.2184312Z src/core/loader/3dsx.cpp
+2025-12-13T19:26:26.2184495Z src/core/loader/ncch.cpp
+2025-12-13T19:26:26.2184681Z src/core/loader/elf.h
+2025-12-13T19:26:26.2184859Z src/core/loader/smdh.h
+2025-12-13T19:26:26.2185031Z src/core/loader/artic.h
+2025-12-13T19:26:26.2185216Z src/core/loader/elf.cpp
+2025-12-13T19:26:26.2185506Z src/core/core_timing.h
+2025-12-13T19:26:26.2185686Z src/core/movie.cpp
+2025-12-13T19:26:26.2185856Z src/core/perf_stats.cpp
+2025-12-13T19:26:26.2186036Z src/core/hle/romfs.h
+2025-12-13T19:26:26.2186210Z src/core/hle/ipc.h
+2025-12-13T19:26:26.2186393Z src/core/hle/result.h
+2025-12-13T19:26:26.2186581Z src/core/hle/applets/applet.cpp
+2025-12-13T19:26:26.2186911Z src/core/hle/applets/erreula.cpp
+2025-12-13T19:26:26.2187132Z src/core/hle/applets/mii_selector.cpp
+2025-12-13T19:26:26.2187367Z src/core/hle/applets/mint.h
+2025-12-13T19:26:26.2187571Z src/core/hle/applets/mint.cpp
+2025-12-13T19:26:26.2187779Z src/core/hle/applets/applet.h
+2025-12-13T19:26:26.2187987Z src/core/hle/applets/swkbd.h
+2025-12-13T19:26:26.2188191Z src/core/hle/applets/swkbd.cpp
+2025-12-13T19:26:26.2188405Z src/core/hle/applets/erreula.h
+2025-12-13T19:26:26.2188612Z src/core/hle/applets/mii_selector.h
+2025-12-13T19:26:26.2188832Z src/core/hle/mii.cpp
+2025-12-13T19:26:26.2189015Z src/core/hle/service/ssl/ssl_c.cpp
+2025-12-13T19:26:26.2189244Z src/core/hle/service/ssl/ssl_c.h
+2025-12-13T19:26:26.2189458Z src/core/hle/service/dsp/dsp_dsp.cpp
+2025-12-13T19:26:26.2189687Z src/core/hle/service/dsp/dsp_dsp.h
+2025-12-13T19:26:26.2189922Z src/core/hle/service/pm/pm_dbg.h
+2025-12-13T19:26:26.2190136Z src/core/hle/service/pm/pm_app.h
+2025-12-13T19:26:26.2190358Z src/core/hle/service/pm/pm_dbg.cpp
+2025-12-13T19:26:26.2190572Z src/core/hle/service/pm/pm.h
+2025-12-13T19:26:26.2190781Z src/core/hle/service/pm/pm.cpp
+2025-12-13T19:26:26.2190987Z src/core/hle/service/pm/pm_app.cpp
+2025-12-13T19:26:26.2191204Z src/core/hle/service/am/am_net.cpp
+2025-12-13T19:26:26.2191415Z src/core/hle/service/am/am_u.cpp
+2025-12-13T19:26:26.2191625Z src/core/hle/service/am/am_sys.cpp
+2025-12-13T19:26:26.2191842Z src/core/hle/service/am/am_app.cpp
+2025-12-13T19:26:26.2192059Z src/core/hle/service/am/am_u.h
+2025-12-13T19:26:26.2192267Z src/core/hle/service/am/am_sys.h
+2025-12-13T19:26:26.2192475Z src/core/hle/service/am/am.h
+2025-12-13T19:26:26.2192817Z src/core/hle/service/am/am_net.h
+2025-12-13T19:26:26.2193028Z src/core/hle/service/am/am.cpp
+2025-12-13T19:26:26.2193235Z src/core/hle/service/am/am_app.h
+2025-12-13T19:26:26.2193445Z src/core/hle/service/ptm/ptm_gets.h
+2025-12-13T19:26:26.2193671Z src/core/hle/service/ptm/ptm_play.h
+2025-12-13T19:26:26.2193887Z src/core/hle/service/ptm/ptm.h
+2025-12-13T19:26:26.2194101Z src/core/hle/service/ptm/ptm_u.h
+2025-12-13T19:26:26.2194321Z src/core/hle/service/ptm/ptm_sets.cpp
+2025-12-13T19:26:26.2194551Z src/core/hle/service/ptm/ptm_gets.cpp
+2025-12-13T19:26:26.2194787Z src/core/hle/service/ptm/ptm_sysm.h
+2025-12-13T19:26:26.2195007Z src/core/hle/service/ptm/ptm_play.cpp
+2025-12-13T19:26:26.2195237Z src/core/hle/service/ptm/ptm_sysm.cpp
+2025-12-13T19:26:26.2195586Z src/core/hle/service/ptm/ptm.cpp
+2025-12-13T19:26:26.2195804Z src/core/hle/service/ptm/ptm_sets.h
+2025-12-13T19:26:26.2196019Z src/core/hle/service/ptm/ptm_u.cpp
+2025-12-13T19:26:26.2196236Z src/core/hle/service/mic/mic_u.h
+2025-12-13T19:26:26.2196444Z src/core/hle/service/mic/mic_u.cpp
+2025-12-13T19:26:26.2196779Z src/core/hle/service/pxi/dev.cpp
+2025-12-13T19:26:26.2197121Z src/core/hle/service/pxi/dev.h
+2025-12-13T19:26:26.2197334Z src/core/hle/service/pxi/pxi.cpp
+2025-12-13T19:26:26.2197550Z src/core/hle/service/pxi/pxi.h
+2025-12-13T19:26:26.2197750Z src/core/hle/service/nwm/nwm.cpp
+2025-12-13T19:26:26.2197974Z src/core/hle/service/nwm/uds_connection.h
+2025-12-13T19:26:26.2198221Z src/core/hle/service/nwm/uds_data.cpp
+2025-12-13T19:26:26.2198450Z src/core/hle/service/nwm/nwm_soc.h
+2025-12-13T19:26:26.2198665Z src/core/hle/service/nwm/uds_data.h
+2025-12-13T19:26:26.2198893Z src/core/hle/service/nwm/uds_common.h
+2025-12-13T19:26:26.2199126Z src/core/hle/service/nwm/uds_connection.cpp
+2025-12-13T19:26:26.2199415Z src/core/hle/service/nwm/nwm_inf.cpp
+2025-12-13T19:26:26.2199645Z src/core/hle/service/nwm/nwm_ext.cpp
+2025-12-13T19:26:26.2199862Z src/core/hle/service/nwm/nwm_sap.h
+2025-12-13T19:26:26.2200084Z src/core/hle/service/nwm/nwm_tst.h
+2025-12-13T19:26:26.2200441Z src/core/hle/service/nwm/nwm_tst.cpp
+2025-12-13T19:26:26.2200673Z src/core/hle/service/nwm/nwm_ext.h
+2025-12-13T19:26:26.2200885Z src/core/hle/service/nwm/nwm_inf.h
+2025-12-13T19:26:26.2201111Z src/core/hle/service/nwm/uds_beacon.cpp
+2025-12-13T19:26:26.2201342Z src/core/hle/service/nwm/nwm_uds.h
+2025-12-13T19:26:26.2201560Z src/core/hle/service/nwm/nwm_cec.h
+2025-12-13T19:26:26.2201771Z src/core/hle/service/nwm/nwm.h
+2025-12-13T19:26:26.2201976Z src/core/hle/service/nwm/nwm_soc.cpp
+2025-12-13T19:26:26.2202204Z src/core/hle/service/nwm/nwm_sap.cpp
+2025-12-13T19:26:26.2202420Z src/core/hle/service/nwm/nwm_uds.cpp
+2025-12-13T19:26:26.2202647Z src/core/hle/service/nwm/uds_beacon.h
+2025-12-13T19:26:26.2202867Z src/core/hle/service/nwm/nwm_cec.cpp
+2025-12-13T19:26:26.2203102Z src/core/hle/service/ir/ir_user.h
+2025-12-13T19:26:26.2203318Z src/core/hle/service/ir/ir_rst.cpp
+2025-12-13T19:26:26.2203539Z src/core/hle/service/ir/extra_hid.h
+2025-12-13T19:26:26.2203754Z src/core/hle/service/ir/ir_user.cpp
+2025-12-13T19:26:26.2203981Z src/core/hle/service/ir/ir_rst.h
+2025-12-13T19:26:26.2204197Z src/core/hle/service/ir/ir.h
+2025-12-13T19:26:26.2204399Z src/core/hle/service/ir/ir_u.h
+2025-12-13T19:26:26.2204707Z src/core/hle/service/ir/extra_hid.cpp
+2025-12-13T19:26:26.2205058Z src/core/hle/service/ir/ir.cpp
+2025-12-13T19:26:26.2205414Z src/core/hle/service/ir/ir_u.cpp
+2025-12-13T19:26:26.2205749Z src/core/hle/service/gsp/gsp_lcd.cpp
+2025-12-13T19:26:26.2206131Z src/core/hle/service/gsp/gsp.cpp
+2025-12-13T19:26:26.2206505Z src/core/hle/service/gsp/gsp_interrupt.h
+2025-12-13T19:26:26.2207087Z src/core/hle/service/gsp/gsp_lcd.h
+2025-12-13T19:26:26.2207475Z src/core/hle/service/gsp/gsp.h
+2025-12-13T19:26:26.2207799Z src/core/hle/service/gsp/gsp_gpu.h
+2025-12-13T19:26:26.2208044Z src/core/hle/service/gsp/gsp_command.h
+2025-12-13T19:26:26.2208290Z src/core/hle/service/gsp/gsp_gpu.cpp
+2025-12-13T19:26:26.2208524Z src/core/hle/service/csnd/csnd_snd.h
+2025-12-13T19:26:26.2208754Z src/core/hle/service/csnd/csnd_snd.cpp
+2025-12-13T19:26:26.2208996Z src/core/hle/service/fs/fs_user.cpp
+2025-12-13T19:26:26.2209225Z src/core/hle/service/fs/file.cpp
+2025-12-13T19:26:26.2209454Z src/core/hle/service/fs/directory.cpp
+2025-12-13T19:26:26.2209753Z src/core/hle/service/fs/archive.h
+2025-12-13T19:26:26.2209987Z src/core/hle/service/fs/file.h
+2025-12-13T19:26:26.2210215Z src/core/hle/service/fs/directory.h
+2025-12-13T19:26:26.2210457Z src/core/hle/service/fs/archive.cpp
+2025-12-13T19:26:26.2210697Z src/core/hle/service/fs/fs_user.h
+2025-12-13T19:26:26.2210936Z src/core/hle/service/ldr_ro/cro_helper.cpp
+2025-12-13T19:26:26.2211203Z src/core/hle/service/ldr_ro/cro_helper.h
+2025-12-13T19:26:26.2211441Z src/core/hle/service/ldr_ro/ldr_ro.h
+2025-12-13T19:26:26.2211946Z src/core/hle/service/ldr_ro/ldr_ro.cpp
+2025-12-13T19:26:26.2212170Z src/core/hle/service/mcu/mcu_hwc.h
+2025-12-13T19:26:26.2212392Z src/core/hle/service/mcu/mcu_hwc.cpp
+2025-12-13T19:26:26.2212620Z src/core/hle/service/mcu/mcu.cpp
+2025-12-13T19:26:26.2212830Z src/core/hle/service/mcu/mcu.h
+2025-12-13T19:26:26.2213042Z src/core/hle/service/apt/apt_s.h
+2025-12-13T19:26:26.2213250Z src/core/hle/service/apt/apt.cpp
+2025-12-13T19:26:26.2213465Z src/core/hle/service/apt/ns.cpp
+2025-12-13T19:26:26.2213694Z src/core/hle/service/apt/applet_manager.cpp
+2025-12-13T19:26:26.2213940Z src/core/hle/service/apt/apt_u.h
+2025-12-13T19:26:26.2214157Z src/core/hle/service/apt/bcfnt/bcfnt.cpp
+2025-12-13T19:26:26.2214402Z src/core/hle/service/apt/bcfnt/bcfnt.h
+2025-12-13T19:26:26.2214629Z src/core/hle/service/apt/apt_s.cpp
+2025-12-13T19:26:26.2214852Z src/core/hle/service/apt/ns_s.cpp
+2025-12-13T19:26:26.2215069Z src/core/hle/service/apt/apt_u.cpp
+2025-12-13T19:26:26.2215282Z src/core/hle/service/apt/apt_a.cpp
+2025-12-13T19:26:26.2215506Z src/core/hle/service/apt/ns_s.h
+2025-12-13T19:26:26.2215713Z src/core/hle/service/apt/ns.h
+2025-12-13T19:26:26.2215925Z src/core/hle/service/apt/apt.h
+2025-12-13T19:26:26.2216130Z src/core/hle/service/apt/errors.h
+2025-12-13T19:26:26.2216349Z src/core/hle/service/apt/ns_c.h
+2025-12-13T19:26:26.2216903Z src/core/hle/service/apt/ns_c.cpp
+2025-12-13T19:26:26.2217203Z src/core/hle/service/apt/applet_manager.h
+2025-12-13T19:26:26.2217455Z src/core/hle/service/apt/apt_a.h
+2025-12-13T19:26:26.2217687Z src/core/hle/service/ps/ps_ps.h
+2025-12-13T19:26:26.2217916Z src/core/hle/service/ps/ps_ps.cpp
+2025-12-13T19:26:26.2218134Z src/core/hle/service/act/act_a.h
+2025-12-13T19:26:26.2218357Z src/core/hle/service/act/act_errors.h
+2025-12-13T19:26:26.2218585Z src/core/hle/service/act/act.h
+2025-12-13T19:26:26.2218796Z src/core/hle/service/act/act_u.h
+2025-12-13T19:26:26.2219013Z src/core/hle/service/act/act_errors.cpp
+2025-12-13T19:26:26.2219257Z src/core/hle/service/act/act_u.cpp
+2025-12-13T19:26:26.2219482Z src/core/hle/service/act/act_a.cpp
+2025-12-13T19:26:26.2219704Z src/core/hle/service/act/act.cpp
+2025-12-13T19:26:26.2219919Z src/core/hle/service/nfc/nfc_device.cpp
+2025-12-13T19:26:26.2220158Z src/core/hle/service/nfc/nfc_u.cpp
+2025-12-13T19:26:26.2220403Z src/core/hle/service/nfc/nfc_results.h
+2025-12-13T19:26:26.2220639Z src/core/hle/service/nfc/nfc.cpp
+2025-12-13T19:26:26.2220864Z src/core/hle/service/nfc/nfc_device.h
+2025-12-13T19:26:26.2221086Z src/core/hle/service/nfc/nfc.h
+2025-12-13T19:26:26.2221302Z src/core/hle/service/nfc/nfc_m.cpp
+2025-12-13T19:26:26.2221526Z src/core/hle/service/nfc/nfc_types.h
+2025-12-13T19:26:26.2221755Z src/core/hle/service/nfc/nfc_m.h
+2025-12-13T19:26:26.2221982Z src/core/hle/service/nfc/nfc_u.h
+2025-12-13T19:26:26.2222215Z src/core/hle/service/nfc/amiibo_crypto.h
+2025-12-13T19:26:26.2222469Z src/core/hle/service/nfc/amiibo_crypto.cpp
+2025-12-13T19:26:26.2222718Z src/core/hle/service/news/news_s.cpp
+2025-12-13T19:26:26.2222949Z src/core/hle/service/news/news.h
+2025-12-13T19:26:26.2223164Z src/core/hle/service/news/news.cpp
+2025-12-13T19:26:26.2223387Z src/core/hle/service/news/news_u.cpp
+2025-12-13T19:26:26.2223608Z src/core/hle/service/news/news_u.h
+2025-12-13T19:26:26.2223827Z src/core/hle/service/news/news_s.h
+2025-12-13T19:26:26.2224040Z src/core/hle/service/cecd/cecd_s.h
+2025-12-13T19:26:26.2224257Z src/core/hle/service/cecd/cecd_s.cpp
+2025-12-13T19:26:26.2224474Z src/core/hle/service/cecd/cecd_u.h
+2025-12-13T19:26:26.2224692Z src/core/hle/service/cecd/cecd_ndm.h
+2025-12-13T19:26:26.2224922Z src/core/hle/service/cecd/cecd_ndm.cpp
+2025-12-13T19:26:26.2225151Z src/core/hle/service/cecd/cecd_u.cpp
+2025-12-13T19:26:26.2225375Z src/core/hle/service/cecd/cecd.h
+2025-12-13T19:26:26.2225582Z src/core/hle/service/cecd/cecd.cpp
+2025-12-13T19:26:26.2225803Z src/core/hle/service/service.cpp
+2025-12-13T19:26:26.2226020Z src/core/hle/service/hid/hid_spvr.cpp
+2025-12-13T19:26:26.2226261Z src/core/hle/service/hid/hid_user.cpp
+2025-12-13T19:26:26.2226483Z src/core/hle/service/hid/hid.cpp
+2025-12-13T19:26:26.2227059Z src/core/hle/service/hid/hid_spvr.h
+2025-12-13T19:26:26.2227287Z src/core/hle/service/hid/hid.h
+2025-12-13T19:26:26.2227504Z src/core/hle/service/hid/hid_user.h
+2025-12-13T19:26:26.2227729Z src/core/hle/service/boss/boss.cpp
+2025-12-13T19:26:26.2227955Z src/core/hle/service/boss/boss_u.h
+2025-12-13T19:26:26.2228180Z src/core/hle/service/boss/boss_p.cpp
+2025-12-13T19:26:26.2228400Z src/core/hle/service/boss/boss_p.h
+2025-12-13T19:26:26.2228621Z src/core/hle/service/boss/boss.h
+2025-12-13T19:26:26.2228834Z src/core/hle/service/boss/boss_u.cpp
+2025-12-13T19:26:26.2229074Z src/core/hle/service/boss/online_service.h
+2025-12-13T19:26:26.2229336Z src/core/hle/service/boss/online_service.cpp
+2025-12-13T19:26:26.2229587Z src/core/hle/service/soc/soc_u.cpp
+2025-12-13T19:26:26.2229803Z src/core/hle/service/soc/soc_u.h
+2025-12-13T19:26:26.2230020Z src/core/hle/service/cam/y2r_u.h
+2025-12-13T19:26:26.2230237Z src/core/hle/service/cam/cam_c.h
+2025-12-13T19:26:26.2230444Z src/core/hle/service/cam/cam_q.cpp
+2025-12-13T19:26:26.2230672Z src/core/hle/service/cam/cam_s.cpp
+2025-12-13T19:26:26.2230885Z src/core/hle/service/cam/y2r_u.cpp
+2025-12-13T19:26:26.2231102Z src/core/hle/service/cam/cam_u.cpp
+2025-12-13T19:26:26.2231320Z src/core/hle/service/cam/cam_params.h
+2025-12-13T19:26:26.2231710Z src/core/hle/service/cam/cam.h
+2025-12-13T19:26:26.2231921Z src/core/hle/service/cam/cam.cpp
+2025-12-13T19:26:26.2232136Z src/core/hle/service/cam/cam_s.h
+2025-12-13T19:26:26.2232347Z src/core/hle/service/cam/cam_u.h
+2025-12-13T19:26:26.2232557Z src/core/hle/service/cam/cam_c.cpp
+2025-12-13T19:26:26.2232776Z src/core/hle/service/cam/cam_q.h
+2025-12-13T19:26:26.2232981Z src/core/hle/service/qtm/qtm_c.h
+2025-12-13T19:26:26.2233196Z src/core/hle/service/qtm/qtm.cpp
+2025-12-13T19:26:26.2233403Z src/core/hle/service/qtm/qtm_s.h
+2025-12-13T19:26:26.2233620Z src/core/hle/service/qtm/qtm_s.cpp
+2025-12-13T19:26:26.2233834Z src/core/hle/service/qtm/qtm.h
+2025-12-13T19:26:26.2234047Z src/core/hle/service/qtm/qtm_sp.h
+2025-12-13T19:26:26.2234265Z src/core/hle/service/qtm/qtm_c.cpp
+2025-12-13T19:26:26.2234487Z src/core/hle/service/qtm/qtm_u.h
+2025-12-13T19:26:26.2234702Z src/core/hle/service/qtm/qtm_sp.cpp
+2025-12-13T19:26:26.2234917Z src/core/hle/service/qtm/qtm_u.cpp
+2025-12-13T19:26:26.2235138Z src/core/hle/service/frd/frd_a.h
+2025-12-13T19:26:26.2235340Z src/core/hle/service/frd/frd.h
+2025-12-13T19:26:26.2235546Z src/core/hle/service/frd/frd_u.h
+2025-12-13T19:26:26.2235753Z src/core/hle/service/frd/frd_u.cpp
+2025-12-13T19:26:26.2235970Z src/core/hle/service/frd/frd_a.cpp
+2025-12-13T19:26:26.2236178Z src/core/hle/service/frd/frd.cpp
+2025-12-13T19:26:26.2236392Z src/core/hle/service/sm/srv.cpp
+2025-12-13T19:26:26.2236601Z src/core/hle/service/sm/srv.h
+2025-12-13T19:26:26.2236970Z src/core/hle/service/sm/sm.cpp
+2025-12-13T19:26:26.2237178Z src/core/hle/service/sm/sm.h
+2025-12-13T19:26:26.2237376Z src/core/hle/service/cfg/cfg.h
+2025-12-13T19:26:26.2237585Z src/core/hle/service/cfg/cfg_u.cpp
+2025-12-13T19:26:26.2237813Z src/core/hle/service/cfg/cfg_defaults.cpp
+2025-12-13T19:26:26.2238067Z src/core/hle/service/cfg/cfg_nor.cpp
+2025-12-13T19:26:26.2238285Z src/core/hle/service/cfg/cfg_i.h
+2025-12-13T19:26:26.2238496Z src/core/hle/service/cfg/cfg_s.h
+2025-12-13T19:26:26.2238704Z src/core/hle/service/cfg/cfg_u.h
+2025-12-13T19:26:26.2238933Z src/core/hle/service/cfg/cfg_nor.h
+2025-12-13T19:26:26.2239153Z src/core/hle/service/cfg/cfg_s.cpp
+2025-12-13T19:26:26.2239376Z src/core/hle/service/cfg/cfg_i.cpp
+2025-12-13T19:26:26.2239605Z src/core/hle/service/cfg/cfg_defaults.h
+2025-12-13T19:26:26.2239839Z src/core/hle/service/cfg/cfg.cpp
+2025-12-13T19:26:26.2240061Z src/core/hle/service/nim/nim.cpp
+2025-12-13T19:26:26.2240274Z src/core/hle/service/nim/nim_aoc.h
+2025-12-13T19:26:26.2240494Z src/core/hle/service/nim/nim_s.h
+2025-12-13T19:26:26.2240707Z src/core/hle/service/nim/nim_s.cpp
+2025-12-13T19:26:26.2240927Z src/core/hle/service/nim/nim.h
+2025-12-13T19:26:26.2241136Z src/core/hle/service/nim/nim_u.h
+2025-12-13T19:26:26.2241356Z src/core/hle/service/nim/nim_aoc.cpp
+2025-12-13T19:26:26.2241708Z src/core/hle/service/nim/nim_u.cpp
+2025-12-13T19:26:26.2241929Z src/core/hle/service/ndm/ndm_u.h
+2025-12-13T19:26:26.2242145Z src/core/hle/service/ndm/ndm_u.cpp
+2025-12-13T19:26:26.2242356Z src/core/hle/service/service.h
+2025-12-13T19:26:26.2242570Z src/core/hle/service/ac/ac_i.cpp
+2025-12-13T19:26:26.2242778Z src/core/hle/service/ac/ac_i.h
+2025-12-13T19:26:26.2242989Z src/core/hle/service/ac/ac.cpp
+2025-12-13T19:26:26.2243193Z src/core/hle/service/ac/ac_u.h
+2025-12-13T19:26:26.2243401Z src/core/hle/service/ac/ac.h
+2025-12-13T19:26:26.2243608Z src/core/hle/service/ac/ac_u.cpp
+2025-12-13T19:26:26.2243832Z src/core/hle/service/plgldr/plgldr.h
+2025-12-13T19:26:26.2244075Z src/core/hle/service/plgldr/plgldr.cpp
+2025-12-13T19:26:26.2244332Z src/core/hle/service/mvd/mvd_std.cpp
+2025-12-13T19:26:26.2244564Z src/core/hle/service/mvd/mvd.cpp
+2025-12-13T19:26:26.2244775Z src/core/hle/service/mvd/mvd.h
+2025-12-13T19:26:26.2244989Z src/core/hle/service/mvd/mvd_std.h
+2025-12-13T19:26:26.2245213Z src/core/hle/service/err/err_f.cpp
+2025-12-13T19:26:26.2245436Z src/core/hle/service/err/err_f.h
+2025-12-13T19:26:26.2245651Z src/core/hle/service/http/http_c.cpp
+2025-12-13T19:26:26.2245908Z src/core/hle/service/http/ctr-common-1-key.h
+2025-12-13T19:26:26.2246299Z src/core/hle/service/http/ctr-common-1-cert.h
+2025-12-13T19:26:26.2246565Z src/core/hle/service/http/http_c.h
+2025-12-13T19:26:26.2246902Z src/core/hle/service/dlp/dlp.cpp
+2025-12-13T19:26:26.2247121Z src/core/hle/service/dlp/dlp_clnt.h
+2025-12-13T19:26:26.2247358Z src/core/hle/service/dlp/dlp_clnt.cpp
+2025-12-13T19:26:26.2247588Z src/core/hle/service/dlp/dlp_srvr.h
+2025-12-13T19:26:26.2247815Z src/core/hle/service/dlp/dlp.h
+2025-12-13T19:26:26.2248027Z src/core/hle/service/dlp/dlp_fkcl.cpp
+2025-12-13T19:26:26.2248261Z src/core/hle/service/dlp/dlp_srvr.cpp
+2025-12-13T19:26:26.2248486Z src/core/hle/service/dlp/dlp_fkcl.h
+2025-12-13T19:26:26.2248710Z src/core/hle/ipc_helpers.h
+2025-12-13T19:26:26.2248910Z src/core/hle/kernel/config_mem.cpp
+2025-12-13T19:26:26.2249141Z src/core/hle/kernel/event.cpp
+2025-12-13T19:26:26.2249354Z src/core/hle/kernel/mutex.h
+2025-12-13T19:26:26.2249563Z src/core/hle/kernel/server_port.h
+2025-12-13T19:26:26.2249798Z src/core/hle/kernel/client_session.cpp
+2025-12-13T19:26:26.2250036Z src/core/hle/kernel/object.cpp
+2025-12-13T19:26:26.2250253Z src/core/hle/kernel/shared_page.h
+2025-12-13T19:26:26.2250467Z src/core/hle/kernel/session.h
+2025-12-13T19:26:26.2250678Z src/core/hle/kernel/ipc.h
+2025-12-13T19:26:26.2250877Z src/core/hle/kernel/svc_wrapper.h
+2025-12-13T19:26:26.2251096Z src/core/hle/kernel/thread.cpp
+2025-12-13T19:26:26.2251310Z src/core/hle/kernel/resource_limit.cpp
+2025-12-13T19:26:26.2251540Z src/core/hle/kernel/event.h
+2025-12-13T19:26:26.2251753Z src/core/hle/kernel/client_session.h
+2025-12-13T19:26:26.2251980Z src/core/hle/kernel/vm_manager.cpp
+2025-12-13T19:26:26.2252208Z src/core/hle/kernel/process.cpp
+2025-12-13T19:26:26.2252423Z src/core/hle/kernel/client_port.cpp
+2025-12-13T19:26:26.2252657Z src/core/hle/kernel/kernel.cpp
+2025-12-13T19:26:26.2252858Z src/core/hle/kernel/hle_ipc.h
+2025-12-13T19:26:26.2253070Z src/core/hle/kernel/session.cpp
+2025-12-13T19:26:26.2253275Z src/core/hle/kernel/timer.h
+2025-12-13T19:26:26.2253490Z src/core/hle/kernel/address_arbiter.cpp
+2025-12-13T19:26:26.2253727Z src/core/hle/kernel/object.h
+2025-12-13T19:26:26.2253943Z src/core/hle/kernel/server_session.h
+2025-12-13T19:26:26.2254175Z src/core/hle/kernel/shared_memory.cpp
+2025-12-13T19:26:26.2254397Z src/core/hle/kernel/timer.cpp
+2025-12-13T19:26:26.2254614Z src/core/hle/kernel/server_port.cpp
+2025-12-13T19:26:26.2254833Z src/core/hle/kernel/vm_manager.h
+2025-12-13T19:26:26.2255057Z src/core/hle/kernel/semaphore.cpp
+2025-12-13T19:26:26.2255272Z src/core/hle/kernel/thread.h
+2025-12-13T19:26:26.2255482Z src/core/hle/kernel/wait_object.cpp
+2025-12-13T19:26:26.2255702Z src/core/hle/kernel/semaphore.h
+2025-12-13T19:26:26.2255918Z src/core/hle/kernel/handle_table.h
+2025-12-13T19:26:26.2256143Z src/core/hle/kernel/address_arbiter.h
+2025-12-13T19:26:26.2256520Z src/core/hle/kernel/ipc_debugger/recorder.h
+2025-12-13T19:26:26.2257002Z src/core/hle/kernel/ipc_debugger/recorder.cpp
+2025-12-13T19:26:26.2257300Z src/core/hle/kernel/svc.h
+2025-12-13T19:26:26.2257507Z src/core/hle/kernel/shared_memory.h
+2025-12-13T19:26:26.2257727Z src/core/hle/kernel/kernel.h
+2025-12-13T19:26:26.2257935Z src/core/hle/kernel/shared_page.cpp
+2025-12-13T19:26:26.2258147Z src/core/hle/kernel/errors.h
+2025-12-13T19:26:26.2258352Z src/core/hle/kernel/wait_object.h
+2025-12-13T19:26:26.2258564Z src/core/hle/kernel/ipc.cpp
+2025-12-13T19:26:26.2258770Z src/core/hle/kernel/config_mem.h
+2025-12-13T19:26:26.2258979Z src/core/hle/kernel/process.h
+2025-12-13T19:26:26.2259197Z src/core/hle/kernel/server_session.cpp
+2025-12-13T19:26:26.2259427Z src/core/hle/kernel/mutex.cpp
+2025-12-13T19:26:26.2259633Z src/core/hle/kernel/memory.cpp
+2025-12-13T19:26:26.2259846Z src/core/hle/kernel/client_port.h
+2025-12-13T19:26:26.2260062Z src/core/hle/kernel/handle_table.cpp
+2025-12-13T19:26:26.2260290Z src/core/hle/kernel/svc.cpp
+2025-12-13T19:26:26.2260493Z src/core/hle/kernel/resource_limit.h
+2025-12-13T19:26:26.2260717Z src/core/hle/kernel/hle_ipc.cpp
+2025-12-13T19:26:26.2260920Z src/core/hle/kernel/memory.h
+2025-12-13T19:26:26.2261122Z src/core/hle/romfs.cpp
+2025-12-13T19:26:26.2261423Z src/core/hle/mii.h
+2025-12-13T19:26:26.2261613Z src/core/system_titles.h
+2025-12-13T19:26:26.2261816Z src/core/savestate_data.h
+2025-12-13T19:26:26.2262006Z src/core/gdbstub/hio.h
+2025-12-13T19:26:26.2262197Z src/core/gdbstub/gdbstub.h
+2025-12-13T19:26:26.2262394Z src/core/gdbstub/gdbstub.cpp
+2025-12-13T19:26:26.2262598Z src/core/gdbstub/hio.cpp
+2025-12-13T19:26:26.2262806Z src/core/file_sys/secure_value_backend.cpp
+2025-12-13T19:26:26.2263049Z src/core/file_sys/seed_db.h
+2025-12-13T19:26:26.2263243Z src/core/file_sys/patch.h
+2025-12-13T19:26:26.2263448Z src/core/file_sys/delay_generator.h
+2025-12-13T19:26:26.2263669Z src/core/file_sys/archive_artic.h
+2025-12-13T19:26:26.2263913Z src/core/file_sys/secure_value_backend_artic.h
+2025-12-13T19:26:26.2264191Z src/core/file_sys/archive_sdmcwriteonly.h
+2025-12-13T19:26:26.2264433Z src/core/file_sys/title_metadata.cpp
+2025-12-13T19:26:26.2264672Z src/core/file_sys/romfs_reader.cpp
+2025-12-13T19:26:26.2264891Z src/core/file_sys/artic_cache.h
+2025-12-13T19:26:26.2265139Z src/core/file_sys/archive_source_sd_savedata.cpp
+2025-12-13T19:26:26.2265404Z src/core/file_sys/delay_generator.cpp
+2025-12-13T19:26:26.2265653Z src/core/file_sys/archive_systemsavedata.h
+2025-12-13T19:26:26.2265908Z src/core/file_sys/plugin_3gx_bootloader.h
+2025-12-13T19:26:26.2266155Z src/core/file_sys/otp.cpp
+2025-12-13T19:26:26.2266366Z src/core/file_sys/archive_other_savedata.h
+2025-12-13T19:26:26.2266604Z src/core/file_sys/layered_fs.h
+2025-12-13T19:26:26.2266943Z src/core/file_sys/certificate.h
+2025-12-13T19:26:26.2267159Z src/core/file_sys/archive_savedata.cpp
+2025-12-13T19:26:26.2267405Z src/core/file_sys/directory_backend.h
+2025-12-13T19:26:26.2267628Z src/core/file_sys/patch.cpp
+2025-12-13T19:26:26.2267839Z src/core/file_sys/plugin_3gx.h
+2025-12-13T19:26:26.2268053Z src/core/file_sys/savedata_archive.cpp
+2025-12-13T19:26:26.2268290Z src/core/file_sys/ncch_container.cpp
+2025-12-13T19:26:26.2268518Z src/core/file_sys/cia_container.cpp
+2025-12-13T19:26:26.2268771Z src/core/file_sys/archive_source_sd_savedata.h
+2025-12-13T19:26:26.2269021Z src/core/file_sys/otp.h
+2025-12-13T19:26:26.2269217Z src/core/file_sys/archive_ncch.h
+2025-12-13T19:26:26.2269435Z src/core/file_sys/certificate.cpp
+2025-12-13T19:26:26.2269651Z src/core/file_sys/artic_cache.cpp
+2025-12-13T19:26:26.2269873Z src/core/file_sys/savedata_archive.h
+2025-12-13T19:26:26.2270094Z src/core/file_sys/disk_archive.cpp
+2025-12-13T19:26:26.2270314Z src/core/file_sys/archive_selfncch.h
+2025-12-13T19:26:26.2270534Z src/core/file_sys/path_parser.h
+2025-12-13T19:26:26.2270745Z src/core/file_sys/ivfc_archive.h
+2025-12-13T19:26:26.2270975Z src/core/file_sys/archive_other_savedata.cpp
+2025-12-13T19:26:26.2271355Z src/core/file_sys/title_metadata.h
+2025-12-13T19:26:26.2271918Z src/core/file_sys/ticket.cpp
+2025-12-13T19:26:26.2272330Z src/core/file_sys/secure_value_backend_artic.cpp
+2025-12-13T19:26:26.2272806Z src/core/file_sys/romfs_reader.h
+2025-12-13T19:26:26.2273173Z src/core/file_sys/errors.h
+2025-12-13T19:26:26.2273524Z src/core/file_sys/ticket.h
+2025-12-13T19:26:26.2273880Z src/core/file_sys/file_backend.h
+2025-12-13T19:26:26.2274278Z src/core/file_sys/archive_ncch.cpp
+2025-12-13T19:26:26.2274673Z src/core/file_sys/archive_artic.cpp
+2025-12-13T19:26:26.2275190Z src/core/file_sys/secure_value_backend.h
+2025-12-13T19:26:26.2275684Z src/core/file_sys/archive_systemsavedata.cpp
+2025-12-13T19:26:26.2276156Z src/core/file_sys/archive_savedata.h
+2025-12-13T19:26:26.2276571Z src/core/file_sys/signature.h
+2025-12-13T19:26:26.2277151Z src/core/file_sys/archive_backend.h
+2025-12-13T19:26:26.2277563Z src/core/file_sys/archive_backend.cpp
+2025-12-13T19:26:26.2277978Z src/core/file_sys/disk_archive.h
+2025-12-13T19:26:26.2278367Z src/core/file_sys/layered_fs.cpp
+2025-12-13T19:26:26.2278759Z src/core/file_sys/archive_sdmc.h
+2025-12-13T19:26:26.2279143Z src/core/file_sys/plugin_3gx.cpp
+2025-12-13T19:26:26.2279516Z src/core/file_sys/seed_db.cpp
+2025-12-13T19:26:26.2279913Z src/core/file_sys/archive_selfncch.cpp
+2025-12-13T19:26:26.2280472Z src/core/file_sys/ncch_container.h
+2025-12-13T19:26:26.2280730Z src/core/file_sys/archive_extsavedata.cpp
+2025-12-13T19:26:26.2280988Z src/core/file_sys/archive_extsavedata.h
+2025-12-13T19:26:26.2281243Z src/core/file_sys/archive_sdmcwriteonly.cpp
+2025-12-13T19:26:26.2281498Z src/core/file_sys/path_parser.cpp
+2025-12-13T19:26:26.2281718Z src/core/file_sys/cia_container.h
+2025-12-13T19:26:26.2281942Z src/core/file_sys/ivfc_archive.cpp
+2025-12-13T19:26:26.2282160Z src/core/file_sys/archive_sdmc.cpp
+2025-12-13T19:26:26.2282381Z src/core/rpc/udp_server.cpp
+2025-12-13T19:26:26.2282584Z src/core/rpc/server.cpp
+2025-12-13T19:26:26.2282783Z src/core/rpc/rpc_server.cpp
+2025-12-13T19:26:26.2282987Z src/core/rpc/rpc_server.h
+2025-12-13T19:26:26.2283184Z src/core/rpc/server.h
+2025-12-13T19:26:26.2283375Z src/core/rpc/udp_server.h
+2025-12-13T19:26:26.2283562Z src/core/rpc/packet.h
+2025-12-13T19:26:26.2283752Z src/core/rpc/packet.cpp
+2025-12-13T19:26:26.2283931Z src/core/3ds.h
+2025-12-13T19:26:26.2284098Z src/core/core.h
+2025-12-13T19:26:26.2284267Z src/core/perf_stats.h
+2025-12-13T19:26:26.2284464Z src/core/cheats/cheat_base.cpp
+2025-12-13T19:26:26.2284668Z src/core/cheats/cheats.h
+2025-12-13T19:26:26.2284866Z src/core/cheats/cheat_base.h
+2025-12-13T19:26:26.2285069Z src/core/cheats/gateway_cheat.h
+2025-12-13T19:26:26.2285288Z src/core/cheats/gateway_cheat.cpp
+2025-12-13T19:26:26.2285507Z src/core/cheats/cheats.cpp
+2025-12-13T19:26:26.2285693Z src/core/core.cpp
+2025-12-13T19:26:26.2285888Z src/core/frontend/image_interface.cpp
+2025-12-13T19:26:26.2286116Z src/core/frontend/emu_window.h
+2025-12-13T19:26:26.2286333Z src/core/frontend/image_interface.h
+2025-12-13T19:26:26.2286566Z src/core/frontend/framebuffer_layout.h
+2025-12-13T19:26:26.2287052Z src/core/frontend/applets/mii_selector.cpp
+2025-12-13T19:26:26.2287302Z src/core/frontend/applets/swkbd.h
+2025-12-13T19:26:26.2287527Z src/core/frontend/applets/swkbd.cpp
+2025-12-13T19:26:26.2287767Z src/core/frontend/applets/default_applets.h
+2025-12-13T19:26:26.2288045Z src/core/frontend/applets/default_applets.cpp
+2025-12-13T19:26:26.2288314Z src/core/frontend/applets/mii_selector.h
+2025-12-13T19:26:26.2288556Z src/core/frontend/camera/factory.h
+2025-12-13T19:26:26.2288782Z src/core/frontend/camera/factory.cpp
+2025-12-13T19:26:26.2289016Z src/core/frontend/camera/interface.cpp
+2025-12-13T19:26:26.2289261Z src/core/frontend/camera/blank_camera.h
+2025-12-13T19:26:26.2289506Z src/core/frontend/camera/blank_camera.cpp
+2025-12-13T19:26:26.2289758Z src/core/frontend/camera/interface.h
+2025-12-13T19:26:26.2289990Z src/core/frontend/framebuffer_layout.cpp
+2025-12-13T19:26:26.2290231Z src/core/frontend/emu_window.cpp
+2025-12-13T19:26:26.2290454Z src/core/frontend/input.h
+2025-12-13T19:26:26.2290647Z src/core/global.h
+2025-12-13T19:26:26.2290965Z src/core/nus_download.h
+2025-12-13T19:26:26.2291155Z src/core/savestate.cpp
+2025-12-13T19:26:26.2291361Z src/core/system_titles.cpp
+2025-12-13T19:26:26.2291550Z src/core/memory.cpp
+2025-12-13T19:26:26.2291731Z src/core/nus_download.cpp
+2025-12-13T19:26:26.2291929Z src/core/hw/default_keys.h
+2025-12-13T19:26:26.2292122Z src/core/hw/rsa/rsa.h
+2025-12-13T19:26:26.2292298Z src/core/hw/rsa/rsa.cpp
+2025-12-13T19:26:26.2292489Z src/core/hw/unique_data.cpp
+2025-12-13T19:26:26.2292681Z src/core/hw/ecc.cpp
+2025-12-13T19:26:26.2292850Z src/core/hw/ecc.h
+2025-12-13T19:26:26.2293022Z src/core/hw/aes/ccm.h
+2025-12-13T19:26:26.2293195Z src/core/hw/aes/key.h
+2025-12-13T19:26:26.2293377Z src/core/hw/aes/key.cpp
+2025-12-13T19:26:26.2293569Z src/core/hw/aes/arithmetic128.cpp
+2025-12-13T19:26:26.2293799Z src/core/hw/aes/arithmetic128.h
+2025-12-13T19:26:26.2294005Z src/core/hw/aes/ccm.cpp
+2025-12-13T19:26:26.2294193Z src/core/hw/unique_data.h
+2025-12-13T19:26:26.2294378Z src/core/hw/y2r.cpp
+2025-12-13T19:26:26.2294557Z src/core/hw/y2r.h
+2025-12-13T19:26:26.2294719Z src/core/memory.h
+2025-12-13T19:26:26.2294887Z src/common/error.cpp
+2025-12-13T19:26:26.2295077Z src/common/precompiled_headers.h
+2025-12-13T19:26:26.2295286Z src/common/error.h
+2025-12-13T19:26:26.2295456Z src/common/hash.h
+2025-12-13T19:26:26.2295736Z src/common/microprofile.h
+2025-12-13T19:26:26.2295941Z src/common/threadsafe_queue.h
+2025-12-13T19:26:26.2296139Z src/common/literals.h
+2025-12-13T19:26:26.2296316Z src/common/thread.cpp
+2025-12-13T19:26:26.2296491Z src/common/atomic_ops.h
+2025-12-13T19:26:26.2296901Z src/common/android_storage.cpp
+2025-12-13T19:26:26.2297108Z src/common/assert.h
+2025-12-13T19:26:26.2297285Z src/common/vector_math.h
+2025-12-13T19:26:26.2297474Z src/common/common_paths.h
+2025-12-13T19:26:26.2297667Z src/common/math_util.cpp
+2025-12-13T19:26:26.2297864Z src/common/string_literal.h
+2025-12-13T19:26:26.2298069Z src/common/apple_authorization.h
+2025-12-13T19:26:26.2298279Z src/common/texture.cpp
+2025-12-13T19:26:26.2298483Z src/common/announce_multiplayer_room.h
+2025-12-13T19:26:26.2298718Z src/common/scope_exit.h
+2025-12-13T19:26:26.2298898Z src/common/web_result.h
+2025-12-13T19:26:26.2299084Z src/common/cityhash.h
+2025-12-13T19:26:26.2299266Z src/common/string_util.h
+2025-12-13T19:26:26.2299506Z src/common/quaternion.h
+2025-12-13T19:26:26.2299700Z src/common/param_package.h
+2025-12-13T19:26:26.2299906Z src/common/memory_detect.h
+2025-12-13T19:26:26.2300093Z src/common/timer.h
+2025-12-13T19:26:26.2300284Z src/common/play_time_manager.cpp
+2025-12-13T19:26:26.2300499Z src/common/file_util.h
+2025-12-13T19:26:26.2300678Z src/common/bit_set.h
+2025-12-13T19:26:26.2300868Z src/common/detached_tasks.h
+2025-12-13T19:26:26.2301070Z src/common/hacks/hack_manager.h
+2025-12-13T19:26:26.2301290Z src/common/hacks/hack_list.cpp
+2025-12-13T19:26:26.2301509Z src/common/hacks/hack_manager.cpp
+2025-12-13T19:26:26.2301735Z src/common/hacks/hack_list.h
+2025-12-13T19:26:26.2301954Z src/common/common_precompiled_headers.h
+2025-12-13T19:26:26.2302193Z src/common/texture.h
+2025-12-13T19:26:26.2302366Z src/common/timer.cpp
+2025-12-13T19:26:26.2302551Z src/common/memory_ref.cpp
+2025-12-13T19:26:26.2302749Z src/common/archives.h
+2025-12-13T19:26:26.2302937Z src/common/microprofile.cpp
+2025-12-13T19:26:26.2303166Z src/common/dynamic_library/ffmpeg.cpp
+2025-12-13T19:26:26.2303424Z src/common/dynamic_library/dynamic_library.cpp
+2025-12-13T19:26:26.2303710Z src/common/dynamic_library/dynamic_library.h
+2025-12-13T19:26:26.2303961Z src/common/dynamic_library/ffmpeg.h
+2025-12-13T19:26:26.2304197Z src/common/thread_queue_list.h
+2025-12-13T19:26:26.2304403Z src/common/cityhash.cpp
+2025-12-13T19:26:26.2304591Z src/common/thread.h
+2025-12-13T19:26:26.2304782Z src/common/bounded_threadsafe_queue.h
+2025-12-13T19:26:26.2305021Z src/common/serialization/atomic.h
+2025-12-13T19:26:26.2305260Z src/common/serialization/boost_flat_set.h
+2025-12-13T19:26:26.2305495Z src/common/file_util.cpp
+2025-12-13T19:26:26.2305688Z src/common/scm_rev.h
+2025-12-13T19:26:26.2305994Z src/common/common_funcs.h
+2025-12-13T19:26:26.2306190Z src/common/math_util.h
+2025-12-13T19:26:26.2306377Z src/common/zstd_compression.h
+2025-12-13T19:26:26.2306587Z src/common/thread_worker.h
+2025-12-13T19:26:26.2307046Z src/common/settings.cpp
+2025-12-13T19:26:26.2307239Z src/common/color.h
+2025-12-13T19:26:26.2307411Z src/common/bit_field.h
+2025-12-13T19:26:26.2307601Z src/common/memory_detect.cpp
+2025-12-13T19:26:26.2307796Z src/common/settings.h
+2025-12-13T19:26:26.2307982Z src/common/linux/gamemode.h
+2025-12-13T19:26:26.2308189Z src/common/linux/gamemode.cpp
+2025-12-13T19:26:26.2308383Z src/common/swap.h
+2025-12-13T19:26:26.2308564Z src/common/aarch64/cpu_detect.h
+2025-12-13T19:26:26.2308777Z src/common/aarch64/cpu_detect.cpp
+2025-12-13T19:26:26.2308999Z src/common/aarch64/oaknut_abi.h
+2025-12-13T19:26:26.2309206Z src/common/aarch64/oaknut_util.h
+2025-12-13T19:26:26.2309415Z src/common/memory_ref.h
+2025-12-13T19:26:26.2309606Z src/common/play_time_manager.h
+2025-12-13T19:26:26.2309810Z src/common/construct.h
+2025-12-13T19:26:26.2309998Z src/common/detached_tasks.cpp
+2025-12-13T19:26:26.2310197Z src/common/arch.h
+2025-12-13T19:26:26.2310374Z src/common/slot_vector.h
+2025-12-13T19:26:26.2310569Z src/common/logging/formatter.h
+2025-12-13T19:26:26.2310778Z src/common/logging/filter.h
+2025-12-13T19:26:26.2311103Z src/common/logging/backend.cpp
+2025-12-13T19:26:26.2311321Z src/common/logging/filter.cpp
+2025-12-13T19:26:26.2311521Z src/common/logging/log_entry.h
+2025-12-13T19:26:26.2311730Z src/common/logging/backend.h
+2025-12-13T19:26:26.2311926Z src/common/logging/log.h
+2025-12-13T19:26:26.2312129Z src/common/logging/text_formatter.h
+2025-12-13T19:26:26.2312363Z src/common/logging/text_formatter.cpp
+2025-12-13T19:26:26.2312597Z src/common/logging/types.h
+2025-12-13T19:26:26.2312800Z src/common/polyfill_thread.h
+2025-12-13T19:26:26.2312998Z src/common/ring_buffer.h
+2025-12-13T19:26:26.2313191Z src/common/alignment.h
+2025-12-13T19:26:26.2313375Z src/common/microprofileui.h
+2025-12-13T19:26:26.2313575Z src/common/x64/xbyak_util.h
+2025-12-13T19:26:26.2313771Z src/common/x64/cpu_detect.h
+2025-12-13T19:26:26.2313970Z src/common/x64/cpu_detect.cpp
+2025-12-13T19:26:26.2331596Z src/common/x64/xbyak_abi.h
+2025-12-13T19:26:26.2331913Z src/common/string_util.cpp
+2025-12-13T19:26:26.2332141Z src/common/unique_function.h
+2025-12-13T19:26:26.2332390Z src/common/param_package.cpp
+2025-12-13T19:26:26.2332608Z src/common/android_storage.h
+2025-12-13T19:26:26.2332831Z src/common/zstd_compression.cpp
+2025-12-13T19:26:26.2333064Z src/common/apple_utils.h
+2025-12-13T19:26:26.2333266Z src/common/static_lru_cache.h
+2025-12-13T19:26:26.2333494Z src/common/apple_authorization.cpp
+2025-12-13T19:26:26.2333735Z src/common/common_types.h
+2025-12-13T19:26:26.2333943Z src/common/expected.h
+2025-12-13T19:26:26.2334150Z src/input_common/precompiled_headers.h
+2025-12-13T19:26:26.2334397Z src/input_common/sdl/sdl.h
+2025-12-13T19:26:26.2334604Z src/input_common/sdl/sdl_impl.cpp
+2025-12-13T19:26:26.2334827Z src/input_common/sdl/sdl.cpp
+2025-12-13T19:26:26.2335037Z src/input_common/sdl/sdl_impl.h
+2025-12-13T19:26:26.2335259Z src/input_common/touch_from_button.h
+2025-12-13T19:26:26.2335501Z src/input_common/touch_from_button.cpp
+2025-12-13T19:26:26.2335734Z src/input_common/analog_from_button.h
+2025-12-13T19:26:26.2335967Z src/input_common/keyboard.cpp
+2025-12-13T19:26:26.2336183Z src/input_common/udp/client.cpp
+2025-12-13T19:26:26.2336396Z src/input_common/udp/udp.h
+2025-12-13T19:26:26.2336588Z src/input_common/udp/udp.cpp
+2025-12-13T19:26:26.2337085Z src/input_common/udp/protocol.cpp
+2025-12-13T19:26:26.2337304Z src/input_common/udp/protocol.h
+2025-12-13T19:26:26.2337514Z src/input_common/udp/client.h
+2025-12-13T19:26:26.2337724Z src/input_common/keyboard.h
+2025-12-13T19:26:26.2337935Z src/input_common/motion_emu.h
+2025-12-13T19:26:26.2338142Z src/input_common/main.h
+2025-12-13T19:26:26.2338342Z src/input_common/analog_from_button.cpp
+2025-12-13T19:26:26.2338600Z src/input_common/gcadapter/gc_adapter.cpp
+2025-12-13T19:26:26.2338856Z src/input_common/gcadapter/gc_poller.cpp
+2025-12-13T19:26:26.2339302Z src/input_common/gcadapter/gc_adapter.h
+2025-12-13T19:26:26.2339543Z src/input_common/gcadapter/gc_poller.h
+2025-12-13T19:26:26.2339776Z src/input_common/main.cpp
+2025-12-13T19:26:26.2339970Z src/input_common/motion_emu.cpp
+2025-12-13T19:26:26.2340194Z src/citra_sdl/precompiled_headers.h
+2025-12-13T19:26:26.2340417Z src/citra_sdl/resource.h
+2025-12-13T19:26:26.2340614Z src/citra_sdl/config.cpp
+2025-12-13T19:26:26.2340806Z src/citra_sdl/citra_sdl.h
+2025-12-13T19:26:26.2341002Z src/citra_sdl/default_ini.h
+2025-12-13T19:26:26.2341204Z src/citra_sdl/citra_sdl.cpp
+2025-12-13T19:26:26.2341393Z src/citra_sdl/config.h
+2025-12-13T19:26:26.2341614Z src/citra_sdl/emu_window/emu_window_sdl2_gl.h
+2025-12-13T19:26:26.2341891Z src/citra_sdl/emu_window/emu_window_sdl2_sw.cpp
+2025-12-13T19:26:26.2342181Z src/citra_sdl/emu_window/emu_window_sdl2_vk.cpp
+2025-12-13T19:26:26.2342458Z src/citra_sdl/emu_window/emu_window_sdl2.cpp
+2025-12-13T19:26:26.2342728Z src/citra_sdl/emu_window/emu_window_sdl2_gl.cpp
+2025-12-13T19:26:26.2342995Z src/citra_sdl/emu_window/emu_window_sdl2.h
+2025-12-13T19:26:26.2343261Z src/citra_sdl/emu_window/emu_window_sdl2_vk.h
+2025-12-13T19:26:26.2343530Z src/citra_sdl/emu_window/emu_window_sdl2_sw.h
+2025-12-13T19:26:26.2343781Z src/audio_core/dsp_interface.cpp
+2025-12-13T19:26:26.2344128Z src/audio_core/precompiled_headers.h
+2025-12-13T19:26:26.2344361Z src/audio_core/time_stretch.h
+2025-12-13T19:26:26.2344576Z src/audio_core/openal_input.h
+2025-12-13T19:26:26.2344782Z src/audio_core/audio_types.h
+2025-12-13T19:26:26.2344995Z src/audio_core/cubeb_input.h
+2025-12-13T19:26:26.2345198Z src/audio_core/static_input.cpp
+2025-12-13T19:26:26.2345415Z src/audio_core/null_input.h
+2025-12-13T19:26:26.2345621Z src/audio_core/codec.cpp
+2025-12-13T19:26:26.2345825Z src/audio_core/sdl2_sink.h
+2025-12-13T19:26:26.2346025Z src/audio_core/null_sink.h
+2025-12-13T19:26:26.2346221Z src/audio_core/input_details.cpp
+2025-12-13T19:26:26.2346441Z src/audio_core/libretro_sink.h
+2025-12-13T19:26:26.2346881Z src/audio_core/hle/hle.cpp
+2025-12-13T19:26:26.2347120Z src/audio_core/hle/source.cpp
+2025-12-13T19:26:26.2347330Z src/audio_core/hle/mixers.cpp
+2025-12-13T19:26:26.2347535Z src/audio_core/hle/hle.h
+2025-12-13T19:26:26.2347725Z src/audio_core/hle/filter.h
+2025-12-13T19:26:26.2347934Z src/audio_core/hle/filter.cpp
+2025-12-13T19:26:26.2348143Z src/audio_core/hle/shared_memory.h
+2025-12-13T19:26:26.2348369Z src/audio_core/hle/common.h
+2025-12-13T19:26:26.2348581Z src/audio_core/hle/aac_decoder.cpp
+2025-12-13T19:26:26.2348799Z src/audio_core/hle/decoder.h
+2025-12-13T19:26:26.2349012Z src/audio_core/hle/aac_decoder.h
+2025-12-13T19:26:26.2349221Z src/audio_core/hle/decoder.cpp
+2025-12-13T19:26:26.2349432Z src/audio_core/hle/source.h
+2025-12-13T19:26:26.2349622Z src/audio_core/hle/mixers.h
+2025-12-13T19:26:26.2349824Z src/audio_core/cubeb_sink.cpp
+2025-12-13T19:26:26.2350020Z src/audio_core/codec.h
+2025-12-13T19:26:26.2350219Z src/audio_core/libretro_sink.cpp
+2025-12-13T19:26:26.2350429Z src/audio_core/input_details.h
+2025-12-13T19:26:26.2350644Z src/audio_core/openal_sink.cpp
+2025-12-13T19:26:26.2350855Z src/audio_core/time_stretch.cpp
+2025-12-13T19:26:26.2351063Z src/audio_core/sdl2_sink.cpp
+2025-12-13T19:26:26.2351267Z src/audio_core/cubeb_sink.h
+2025-12-13T19:26:26.2351464Z src/audio_core/sink_details.h
+2025-12-13T19:26:26.2351667Z src/audio_core/sink.h
+2025-12-13T19:26:26.2351851Z src/audio_core/openal_input.cpp
+2025-12-13T19:26:26.2352062Z src/audio_core/cubeb_input.cpp
+2025-12-13T19:26:26.2352267Z src/audio_core/openal_sink.h
+2025-12-13T19:26:26.2352486Z src/audio_core/input.h
+2025-12-13T19:26:26.2352679Z src/audio_core/dsp_interface.h
+2025-12-13T19:26:26.2352899Z src/audio_core/sink_details.cpp
+2025-12-13T19:26:26.2353120Z src/audio_core/interpolate.cpp
+2025-12-13T19:26:26.2353329Z src/audio_core/lle/lle.cpp
+2025-12-13T19:26:26.2353533Z src/audio_core/lle/lle.h
+2025-12-13T19:26:26.2353731Z src/audio_core/interpolate.h
+2025-12-13T19:26:26.2353949Z src/audio_core/static_input.h
+2025-12-13T19:26:26.2354300Z src/tests/precompiled_headers.h
+2025-12-13T19:26:26.2354519Z src/tests/core/core_timing.cpp
+2025-12-13T19:26:26.2354736Z src/tests/core/hle/kernel/hle_ipc.cpp
+2025-12-13T19:26:26.2354987Z src/tests/core/file_sys/path_parser.cpp
+2025-12-13T19:26:26.2355230Z src/tests/core/memory/vm_manager.cpp
+2025-12-13T19:26:26.2355472Z src/tests/core/memory/memory.cpp
+2025-12-13T19:26:26.2355696Z src/tests/common/file_util.cpp
+2025-12-13T19:26:26.2355907Z src/tests/common/param_package.cpp
+2025-12-13T19:26:26.2356136Z src/tests/common/bit_field.cpp
+2025-12-13T19:26:26.2356350Z src/tests/audio_core/decoder_tests.cpp
+2025-12-13T19:26:26.2356802Z src/tests/audio_core/merryhime_3ds_audio/audio_test_biquad_filter.cpp
+2025-12-13T19:26:26.2357224Z src/tests/audio_core/merryhime_3ds_audio/merry_audio/service_fixture.h
+2025-12-13T19:26:26.2357652Z src/tests/audio_core/merryhime_3ds_audio/merry_audio/service_fixture.cpp
+2025-12-13T19:26:26.2358063Z src/tests/audio_core/merryhime_3ds_audio/merry_audio/merry_audio.h
+2025-12-13T19:26:26.2358467Z src/tests/audio_core/merryhime_3ds_audio/merry_audio/merry_audio.cpp
+2025-12-13T19:26:26.2358795Z src/tests/audio_core/audio_fixures.h
+2025-12-13T19:26:26.2359021Z src/tests/audio_core/hle/hle.cpp
+2025-12-13T19:26:26.2359247Z src/tests/audio_core/hle/source.cpp
+2025-12-13T19:26:26.2359667Z src/tests/audio_core/lle/lle.cpp
+2025-12-13T19:26:26.2359941Z src/tests/video_core/shader.cpp
+2025-12-13T19:26:26.2360153Z src/citra_libretro/environment.h
+2025-12-13T19:26:26.2360374Z src/citra_libretro/libretro_vk.h
+2025-12-13T19:26:26.2360588Z src/citra_libretro/citra_libretro.h
+2025-12-13T19:26:26.2360821Z src/citra_libretro/core_settings.h
+2025-12-13T19:26:26.2361048Z src/citra_libretro/environment.cpp
+2025-12-13T19:26:26.2361271Z src/citra_libretro/core_settings.cpp
+2025-12-13T19:26:26.2361503Z src/citra_libretro/libretro_vk.cpp
+2025-12-13T19:26:26.2361748Z src/citra_libretro/emu_window/libretro_window.h
+2025-12-13T19:26:26.2362043Z src/citra_libretro/emu_window/libretro_window.cpp
+2025-12-13T19:26:26.2362328Z src/citra_libretro/input/input_factory.h
+2025-12-13T19:26:26.2362591Z src/citra_libretro/input/mouse_tracker.cpp
+2025-12-13T19:26:26.2362844Z src/citra_libretro/input/input_factory.cpp
+2025-12-13T19:26:26.2363096Z src/citra_libretro/input/mouse_tracker.h
+2025-12-13T19:26:26.2363348Z src/citra_libretro/citra_libretro.cpp
+2025-12-13T19:26:26.2363594Z src/video_core/precompiled_headers.h
+2025-12-13T19:26:26.2363857Z src/video_core/renderer_vulkan/vk_rasterizer.cpp
+2025-12-13T19:26:26.2364176Z src/video_core/renderer_vulkan/vk_descriptor_update_queue.h
+2025-12-13T19:26:26.2364507Z src/video_core/renderer_vulkan/vk_render_manager.h
+2025-12-13T19:26:26.2364802Z src/video_core/renderer_vulkan/vk_resource_pool.h
+2025-12-13T19:26:26.2365096Z src/video_core/renderer_vulkan/vk_pipeline_cache.h
+2025-12-13T19:26:26.2365380Z src/video_core/renderer_vulkan/renderer_vulkan.cpp
+2025-12-13T19:26:26.2365687Z src/video_core/renderer_vulkan/vk_master_semaphore.cpp
+2025-12-13T19:26:26.2365995Z src/video_core/renderer_vulkan/vk_platform.cpp
+2025-12-13T19:26:26.2366276Z src/video_core/renderer_vulkan/vk_stream_buffer.h
+2025-12-13T19:26:26.2366558Z src/video_core/renderer_vulkan/vk_swapchain.cpp
+2025-12-13T19:26:26.2366950Z src/video_core/renderer_vulkan/vk_scheduler.cpp
+2025-12-13T19:26:26.2367251Z src/video_core/renderer_vulkan/vk_graphics_pipeline.h
+2025-12-13T19:26:26.2367587Z src/video_core/renderer_vulkan/vk_descriptor_update_queue.cpp
+2025-12-13T19:26:26.2367923Z src/video_core/renderer_vulkan/vk_texture_runtime.cpp
+2025-12-13T19:26:26.2368216Z src/video_core/renderer_vulkan/renderer_vulkan.h
+2025-12-13T19:26:26.2368508Z src/video_core/renderer_vulkan/vk_rasterizer_cache.cpp
+2025-12-13T19:26:26.2368807Z src/video_core/renderer_vulkan/vk_present_window.h
+2025-12-13T19:26:26.2369088Z src/video_core/renderer_vulkan/vk_memory_util.cpp
+2025-12-13T19:26:26.2369369Z src/video_core/renderer_vulkan/vk_shader_util.h
+2025-12-13T19:26:26.2369641Z src/video_core/renderer_vulkan/vk_shader_util.cpp
+2025-12-13T19:26:26.2370043Z src/video_core/renderer_vulkan/vk_blit_helper.h
+2025-12-13T19:26:26.2370306Z src/video_core/renderer_vulkan/pica_to_vk.h
+2025-12-13T19:26:26.2370599Z src/video_core/renderer_vulkan/vk_graphics_pipeline.cpp
+2025-12-13T19:26:26.2370902Z src/video_core/renderer_vulkan/vk_memory_util.h
+2025-12-13T19:26:26.2371186Z src/video_core/renderer_vulkan/vk_instance.cpp
+2025-12-13T19:26:26.2371459Z src/video_core/renderer_vulkan/vk_swapchain.h
+2025-12-13T19:26:26.2371721Z src/video_core/renderer_vulkan/vk_instance.h
+2025-12-13T19:26:26.2371995Z src/video_core/renderer_vulkan/vk_blit_helper.cpp
+2025-12-13T19:26:26.2372264Z src/video_core/renderer_vulkan/vk_common.cpp
+2025-12-13T19:26:26.2372540Z src/video_core/renderer_vulkan/vk_texture_runtime.h
+2025-12-13T19:26:26.2372835Z src/video_core/renderer_vulkan/vk_resource_pool.cpp
+2025-12-13T19:26:26.2373115Z src/video_core/renderer_vulkan/vk_common.h
+2025-12-13T19:26:26.2373396Z src/video_core/renderer_vulkan/vk_present_window.cpp
+2025-12-13T19:26:26.2373681Z src/video_core/renderer_vulkan/vk_rasterizer.h
+2025-12-13T19:26:26.2373969Z src/video_core/renderer_vulkan/vk_pipeline_cache.cpp
+2025-12-13T19:26:26.2374280Z src/video_core/renderer_vulkan/vk_master_semaphore.h
+2025-12-13T19:26:26.2374575Z src/video_core/renderer_vulkan/vk_scheduler.h
+2025-12-13T19:26:26.2374971Z src/video_core/renderer_vulkan/vk_stream_buffer.cpp
+2025-12-13T19:26:26.2375261Z src/video_core/renderer_vulkan/vk_platform.h
+2025-12-13T19:26:26.2375533Z src/video_core/renderer_vulkan/vk_render_manager.cpp
+2025-12-13T19:26:26.2375796Z src/video_core/gpu.h
+2025-12-13T19:26:26.2376013Z src/video_core/renderer_opengl/gl_shader_util.cpp
+2025-12-13T19:26:26.2376285Z src/video_core/renderer_opengl/gl_state.h
+2025-12-13T19:26:26.2376572Z src/video_core/renderer_opengl/gl_rasterizer_cache.cpp
+2025-12-13T19:26:26.2377149Z src/video_core/renderer_opengl/frame_dumper_opengl.cpp
+2025-12-13T19:26:26.2377448Z src/video_core/renderer_opengl/gl_stream_buffer.h
+2025-12-13T19:26:26.2377716Z src/video_core/renderer_opengl/gl_driver.h
+2025-12-13T19:26:26.2378010Z src/video_core/renderer_opengl/gl_blit_helper.cpp
+2025-12-13T19:26:26.2378119Z src/video_core/renderer_opengl/renderer_opengl.cpp
+2025-12-13T19:26:26.2378218Z src/video_core/renderer_opengl/gl_rasterizer.h
+2025-12-13T19:26:26.2378342Z src/video_core/renderer_opengl/frame_dumper_opengl.h
+2025-12-13T19:26:26.2378464Z src/video_core/renderer_opengl/gl_shader_disk_cache.cpp
+2025-12-13T19:26:26.2378573Z src/video_core/renderer_opengl/gl_resource_manager.h
+2025-12-13T19:26:26.2378671Z src/video_core/renderer_opengl/gl_vars.h
+2025-12-13T19:26:26.2378775Z src/video_core/renderer_opengl/gl_rasterizer.cpp
+2025-12-13T19:26:26.2378889Z src/video_core/renderer_opengl/gl_texture_mailbox.cpp
+2025-12-13T19:26:26.2379018Z src/video_core/renderer_opengl/post_processing_opengl.h
+2025-12-13T19:26:26.2379111Z src/video_core/renderer_opengl/pica_to_gl.h
+2025-12-13T19:26:26.2379219Z src/video_core/renderer_opengl/gl_shader_manager.h
+2025-12-13T19:26:26.2379326Z src/video_core/renderer_opengl/gl_texture_runtime.h
+2025-12-13T19:26:26.2379430Z src/video_core/renderer_opengl/gl_vars.cpp
+2025-12-13T19:26:26.2379536Z src/video_core/renderer_opengl/gl_texture_mailbox.h
+2025-12-13T19:26:26.2379637Z src/video_core/renderer_opengl/renderer_opengl.h
+2025-12-13T19:26:26.2379781Z src/video_core/renderer_opengl/post_processing_opengl.cpp
+2025-12-13T19:26:26.2379892Z src/video_core/renderer_opengl/gl_shader_manager.cpp
+2025-12-13T19:26:26.2379993Z src/video_core/renderer_opengl/gl_blit_helper.h
+2025-12-13T19:26:26.2380115Z src/video_core/renderer_opengl/gl_resource_manager.cpp
+2025-12-13T19:26:26.2380213Z src/video_core/renderer_opengl/gl_shader_util.h
+2025-12-13T19:26:26.2380321Z src/video_core/renderer_opengl/gl_stream_buffer.cpp
+2025-12-13T19:26:26.2380414Z src/video_core/renderer_opengl/gl_state.cpp
+2025-12-13T19:26:26.2380531Z src/video_core/renderer_opengl/gl_shader_disk_cache.h
+2025-12-13T19:26:26.2380625Z src/video_core/renderer_opengl/gl_driver.cpp
+2025-12-13T19:26:26.2380734Z src/video_core/renderer_opengl/gl_texture_runtime.cpp
+2025-12-13T19:26:26.2380969Z src/video_core/shader/shader_interpreter.h
+2025-12-13T19:26:26.2381053Z src/video_core/shader/debug_data.h
+2025-12-13T19:26:26.2381156Z src/video_core/shader/shader_jit_a64_compiler.cpp
+2025-12-13T19:26:26.2381240Z src/video_core/shader/shader_jit.cpp
+2025-12-13T19:26:26.2381346Z src/video_core/shader/shader_jit_a64_compiler.h
+2025-12-13T19:26:26.2381429Z src/video_core/shader/shader.cpp
+2025-12-13T19:26:26.2381522Z src/video_core/shader/shader_interpreter.cpp
+2025-12-13T19:26:26.2381606Z src/video_core/shader/shader.h
+2025-12-13T19:26:26.2381706Z src/video_core/shader/shader_jit_x64_compiler.cpp
+2025-12-13T19:26:26.2381784Z src/video_core/shader/shader_jit.h
+2025-12-13T19:26:26.2381885Z src/video_core/shader/shader_jit_x64_compiler.h
+2025-12-13T19:26:26.2381993Z src/video_core/shader/generator/shader_uniforms.cpp
+2025-12-13T19:26:26.2382098Z src/video_core/shader/generator/spv_fs_shader_gen.h
+2025-12-13T19:26:26.2382197Z src/video_core/shader/generator/shader_uniforms.h
+2025-12-13T19:26:26.2382341Z src/video_core/shader/generator/glsl_shader_decompiler.cpp
+2025-12-13T19:26:26.2382468Z src/video_core/shader/generator/glsl_shader_decompiler.h
+2025-12-13T19:26:26.2382573Z src/video_core/shader/generator/glsl_shader_gen.cpp
+2025-12-13T19:26:26.2382784Z src/video_core/shader/generator/pica_fs_config.h
+2025-12-13T19:26:26.2382889Z src/video_core/shader/generator/glsl_shader_gen.h
+2025-12-13T19:26:26.2382977Z src/video_core/shader/generator/profile.h
+2025-12-13T19:26:26.2383085Z src/video_core/shader/generator/glsl_fs_shader_gen.h
+2025-12-13T19:26:26.2383195Z src/video_core/shader/generator/pica_fs_config.cpp
+2025-12-13T19:26:26.2383308Z src/video_core/shader/generator/glsl_fs_shader_gen.cpp
+2025-12-13T19:26:26.2383417Z src/video_core/shader/generator/spv_fs_shader_gen.cpp
+2025-12-13T19:26:26.2383515Z src/video_core/shader/generator/shader_gen.h
+2025-12-13T19:26:26.2383610Z src/video_core/shader/generator/shader_gen.cpp
+2025-12-13T19:26:26.2383696Z src/video_core/rasterizer_accelerated.h
+2025-12-13T19:26:26.2383777Z src/video_core/utils.h
+2025-12-13T19:26:26.2383854Z src/video_core/video_core.cpp
+2025-12-13T19:26:26.2383939Z src/video_core/debug_utils/debug_utils.h
+2025-12-13T19:26:26.2384028Z src/video_core/debug_utils/debug_utils.cpp
+2025-12-13T19:26:26.2384113Z src/video_core/pica_types.h
+2025-12-13T19:26:26.2384190Z src/video_core/renderer_base.h
+2025-12-13T19:26:26.2384264Z src/video_core/video_core.h
+2025-12-13T19:26:26.2384368Z src/video_core/rasterizer_cache/surface_base.h
+2025-12-13T19:26:26.2384475Z src/video_core/rasterizer_cache/rasterizer_cache.h
+2025-12-13T19:26:26.2384558Z src/video_core/rasterizer_cache/utils.h
+2025-12-13T19:26:26.2384675Z src/video_core/rasterizer_cache/rasterizer_cache_base.h
+2025-12-13T19:26:26.2384784Z src/video_core/rasterizer_cache/sampler_params.h
+2025-12-13T19:26:26.2384888Z src/video_core/rasterizer_cache/surface_base.cpp
+2025-12-13T19:26:26.2384983Z src/video_core/rasterizer_cache/texture_cube.h
+2025-12-13T19:26:26.2385077Z src/video_core/rasterizer_cache/utils.cpp
+2025-12-13T19:26:26.2385179Z src/video_core/rasterizer_cache/surface_params.h
+2025-12-13T19:26:26.2385274Z src/video_core/rasterizer_cache/pixel_format.h
+2025-12-13T19:26:26.2385376Z src/video_core/rasterizer_cache/pixel_format.cpp
+2025-12-13T19:26:26.2385496Z src/video_core/rasterizer_cache/rasterizer_cache.cpp
+2025-12-13T19:26:26.2385594Z src/video_core/rasterizer_cache/texture_codec.h
+2025-12-13T19:26:26.2385699Z src/video_core/rasterizer_cache/framebuffer_base.h
+2025-12-13T19:26:26.2385796Z src/video_core/rasterizer_cache/slot_id.h
+2025-12-13T19:26:26.2385903Z src/video_core/rasterizer_cache/surface_params.cpp
+2025-12-13T19:26:26.2385982Z src/video_core/renderer_base.cpp
+2025-12-13T19:26:26.2386073Z src/video_core/custom_textures/material.h
+2025-12-13T19:26:26.2386185Z src/video_core/custom_textures/custom_tex_manager.cpp
+2025-12-13T19:26:26.2386289Z src/video_core/custom_textures/custom_tex_manager.h
+2025-12-13T19:26:26.2386381Z src/video_core/custom_textures/material.cpp
+2025-12-13T19:26:26.2386564Z src/video_core/custom_textures/custom_format.h
+2025-12-13T19:26:26.2386787Z src/video_core/custom_textures/custom_format.cpp
+2025-12-13T19:26:26.2386875Z src/video_core/rasterizer_interface.h
+2025-12-13T19:26:26.2386958Z src/video_core/gpu_impl.h
+2025-12-13T19:26:26.2387060Z src/video_core/renderer_software/sw_texturing.h
+2025-12-13T19:26:26.2387171Z src/video_core/renderer_software/renderer_software.h
+2025-12-13T19:26:26.2387269Z src/video_core/renderer_software/sw_clipper.cpp
+2025-12-13T19:26:26.2387370Z src/video_core/renderer_software/sw_blitter.h
+2025-12-13T19:26:26.2387467Z src/video_core/renderer_software/sw_proctex.h
+2025-12-13T19:26:26.2387571Z src/video_core/renderer_software/sw_lighting.cpp
+2025-12-13T19:26:26.2387673Z src/video_core/renderer_software/sw_lighting.h
+2025-12-13T19:26:26.2387778Z src/video_core/renderer_software/sw_framebuffer.h
+2025-12-13T19:26:26.2387873Z src/video_core/renderer_software/sw_clipper.h
+2025-12-13T19:26:26.2387977Z src/video_core/renderer_software/sw_rasterizer.h
+2025-12-13T19:26:26.2388086Z src/video_core/renderer_software/sw_rasterizer.cpp
+2025-12-13T19:26:26.2388194Z src/video_core/renderer_software/sw_framebuffer.cpp
+2025-12-13T19:26:26.2388293Z src/video_core/renderer_software/sw_proctex.cpp
+2025-12-13T19:26:26.2388526Z src/video_core/renderer_software/renderer_software.cpp
+2025-12-13T19:26:26.2388627Z src/video_core/renderer_software/sw_blitter.cpp
+2025-12-13T19:26:26.2388730Z src/video_core/renderer_software/sw_texturing.cpp
+2025-12-13T19:26:26.2388827Z src/video_core/right_eye_disabler.cpp
+2025-12-13T19:26:26.2388917Z src/video_core/pica/geometry_pipeline.cpp
+2025-12-13T19:26:26.2389000Z src/video_core/pica/regs_external.h
+2025-12-13T19:26:26.2389082Z src/video_core/pica/pica_core.cpp
+2025-12-13T19:26:26.2389170Z src/video_core/pica/output_vertex.h
+2025-12-13T19:26:26.2389251Z src/video_core/pica/regs_texturing.h
+2025-12-13T19:26:26.2389338Z src/video_core/pica/packed_attribute.h
+2025-12-13T19:26:26.2389425Z src/video_core/pica/shader_setup.cpp
+2025-12-13T19:26:26.2389513Z src/video_core/pica/output_vertex.cpp
+2025-12-13T19:26:26.2389595Z src/video_core/pica/regs_internal.cpp
+2025-12-13T19:26:26.2389680Z src/video_core/pica/regs_lighting.h
+2025-12-13T19:26:26.2389762Z src/video_core/pica/regs_rasterizer.h
+2025-12-13T19:26:26.2389848Z src/video_core/pica/regs_pipeline.h
+2025-12-13T19:26:26.2389937Z src/video_core/pica/geometry_pipeline.h
+2025-12-13T19:26:26.2390022Z src/video_core/pica/shader_unit.cpp
+2025-12-13T19:26:26.2390106Z src/video_core/pica/regs_framebuffer.h
+2025-12-13T19:26:26.2390188Z src/video_core/pica/shader_setup.h
+2025-12-13T19:26:26.2390273Z src/video_core/pica/regs_internal.h
+2025-12-13T19:26:26.2390351Z src/video_core/pica/regs_shader.h
+2025-12-13T19:26:26.2390431Z src/video_core/pica/dirty_regs.h
+2025-12-13T19:26:26.2390510Z src/video_core/pica/pica_core.h
+2025-12-13T19:26:26.2390596Z src/video_core/pica/shader_unit.h
+2025-12-13T19:26:26.2390677Z src/video_core/pica/vertex_loader.cpp
+2025-12-13T19:26:26.2390769Z src/video_core/pica/primitive_assembly.cpp
+2025-12-13T19:26:26.2390855Z src/video_core/pica/regs_lcd.h
+2025-12-13T19:26:26.2390942Z src/video_core/pica/primitive_assembly.h
+2025-12-13T19:26:26.2391023Z src/video_core/pica/vertex_loader.h
+2025-12-13T19:26:26.2391095Z src/video_core/gpu.cpp
+2025-12-13T19:26:26.2391181Z src/video_core/right_eye_disabler.h
+2025-12-13T19:26:26.2391257Z src/video_core/gpu_debugger.h
+2025-12-13T19:26:26.2391345Z src/video_core/rasterizer_accelerated.cpp
+2025-12-13T19:26:26.2391425Z src/video_core/texture/etc1.h
+2025-12-13T19:26:26.2391501Z src/video_core/texture/etc1.cpp
+2025-12-13T19:26:26.2391583Z src/video_core/texture/texture_decode.h
+2025-12-13T19:26:26.2391673Z src/video_core/texture/texture_decode.cpp'
+2025-12-13T19:26:26.2391741Z + set +x
+2025-12-13T19:26:51.9356821Z !!! src/citra_libretro/libretro_vk.cpp not compliant to coding style, here is the fix:
+2025-12-13T19:26:51.9357709Z --- src/citra_libretro/libretro_vk.cpp	2025-12-13 19:26:25.943614858 +0000
+2025-12-13T19:26:51.9359080Z +++ /dev/fd/63	2025-12-13 19:26:51.896623408 +0000
+2025-12-13T19:26:51.9359528Z @@ -263,7 +263,7 @@
+2025-12-13T19:26:51.9359835Z      // Get queues from LibRetro
+2025-12-13T19:26:51.9360220Z      graphics_queue = vulkan_intf->queue;
+2025-12-13T19:26:51.9360944Z      queue_family_index = vulkan_intf->queue_index; // ai code review comment here is wrong
+2025-12-13T19:26:51.9361694Z -    present_queue = graphics_queue; // Same queue for LibRetro
+2025-12-13T19:26:51.9362350Z +    present_queue = graphics_queue;                // Same queue for LibRetro
+2025-12-13T19:26:51.9362896Z  
+2025-12-13T19:26:51.9363152Z      if (!graphics_queue) {
+2025-12-13T19:26:51.9363698Z          LOG_CRITICAL(Render_Vulkan, "LibRetro provided invalid graphics queue!");
+2025-12-13T19:26:52.3596054Z !!! src/video_core/renderer_vulkan/renderer_vulkan.cpp not compliant to coding style, here is the fix:
+2025-12-13T19:26:52.3597278Z --- src/video_core/renderer_vulkan/renderer_vulkan.cpp	2025-12-13 19:26:26.024614881 +0000
+2025-12-13T19:26:52.3598004Z +++ /dev/fd/63	2025-12-13 19:26:52.281623487 +0000
+2025-12-13T19:26:52.3598422Z @@ -62,19 +62,18 @@
+2025-12-13T19:26:52.3598741Z  static bool IsLowRefreshRate() {
+2025-12-13T19:26:52.3599148Z  #if (defined(__APPLE__) || defined(ENABLE_SDL2)) && !defined(HAVE_LIBRETRO)
+2025-12-13T19:26:52.3599882Z  #ifdef __APPLE__
+2025-12-13T19:26:52.3600228Z -// Need a special implementation because MacOS kills itself in disgust if the
+2025-12-13T19:26:52.3600770Z -// input thread calls SDL_PumpEvents at the same time as we're in SDL_Init here.
+2025-12-13T19:26:52.3601598Z +    // Need a special implementation because MacOS kills itself in disgust if the
+2025-12-13T19:26:52.3602403Z +    // input thread calls SDL_PumpEvents at the same time as we're in SDL_Init here.
+2025-12-13T19:26:52.3603048Z  
+2025-12-13T19:26:52.3603540Z -// Apple's low power mode sometimes limits applications to 30fps without changing
+2025-12-13T19:26:52.3604256Z -// the refresh rate, meaning the above code doesn't catch it.
+2025-12-13T19:26:52.3611090Z -if (AppleUtils::IsLowPowerModeEnabled()) {
+2025-12-13T19:26:52.3611413Z -  LOG_WARNING(Render_Vulkan,
+2025-12-13T19:26:52.3611750Z -              "Apple's low power mode is enabled, assuming low application "
+2025-12-13T19:26:52.3612100Z -              "framerate. FIFO will be disabled");
+2025-12-13T19:26:52.3612383Z -  return true;
+2025-12-13T19:26:52.3612555Z -}
+2025-12-13T19:26:52.3612856Z +    // Apple's low power mode sometimes limits applications to 30fps without changing
+2025-12-13T19:26:52.3613280Z +    // the refresh rate, meaning the above code doesn't catch it.
+2025-12-13T19:26:52.3613619Z +    if (AppleUtils::IsLowPowerModeEnabled()) {
+2025-12-13T19:26:52.3614031Z +        LOG_WARNING(Render_Vulkan, "Apple's low power mode is enabled, assuming low application "
+2025-12-13T19:26:52.3614439Z +                                   "framerate. FIFO will be disabled");
+2025-12-13T19:26:52.3614702Z +        return true;
+2025-12-13T19:26:52.3614931Z +    }
+2025-12-13T19:26:52.3615074Z  
+2025-12-13T19:26:52.3615314Z -const auto cur_refresh_rate = AppleUtils::GetRefreshRate();
+2025-12-13T19:26:52.3615684Z +    const auto cur_refresh_rate = AppleUtils::GetRefreshRate();
+2025-12-13T19:26:52.3615959Z  
+2025-12-13T19:26:52.3616111Z  #elif defined(ENABLE_SDL2)
+2025-12-13T19:26:52.3616344Z      if (SDL_WasInit(SDL_INIT_VIDEO) == 0) {
+2025-12-13T19:26:52.3616581Z @@ -102,17 +101,17 @@
+2025-12-13T19:26:52.3617091Z  #endif // defined(__APPLE__) || defined(ENABLE_SDL2)
+2025-12-13T19:26:52.3617347Z  
+2025-12-13T19:26:52.3617528Z  #if defined(__APPLE__) && !defined(HAVE_LIBRETRO)
+2025-12-13T19:26:52.3617946Z -// Apple's low power mode sometimes limits applications to 30fps without changing the refresh
+2025-12-13T19:26:52.3618360Z -// rate, meaning the above code doesn't catch it.
+2025-12-13T19:26:52.3618650Z -if (AppleUtils::IsLowPowerModeEnabled()) {
+2025-12-13T19:26:52.3619038Z -  LOG_WARNING(Render_Vulkan, "Apple's low power mode is enabled, assuming low application "
+2025-12-13T19:26:52.3619439Z -                             "framerate. FIFO will be disabled");
+2025-12-13T19:26:52.3620012Z -  return true;
+2025-12-13T19:26:52.3620172Z -}
+2025-12-13T19:26:52.3620481Z +    // Apple's low power mode sometimes limits applications to 30fps without changing the refresh
+2025-12-13T19:26:52.3620904Z +    // rate, meaning the above code doesn't catch it.
+2025-12-13T19:26:52.3621195Z +    if (AppleUtils::IsLowPowerModeEnabled()) {
+2025-12-13T19:26:52.3621582Z +        LOG_WARNING(Render_Vulkan, "Apple's low power mode is enabled, assuming low application "
+2025-12-13T19:26:52.3621990Z +                                   "framerate. FIFO will be disabled");
+2025-12-13T19:26:52.3622246Z +        return true;
+2025-12-13T19:26:52.3622412Z +    }
+2025-12-13T19:26:52.3622567Z  #endif
+2025-12-13T19:26:52.3622710Z  
+2025-12-13T19:26:52.3623010Z -// We have no available method of checking refresh rate. Just assume that everything is fine.
+2025-12-13T19:26:52.3623379Z -return false;
+2025-12-13T19:26:52.3623694Z +    // We have no available method of checking refresh rate. Just assume that everything is fine.
+2025-12-13T19:26:52.3624062Z +    return false;
+2025-12-13T19:26:52.3624220Z  }
+2025-12-13T19:26:52.3624376Z  } // Anonymous namespace
+2025-12-13T19:26:52.3624562Z  
+2025-12-13T19:26:57.3239385Z + '[' 1 = 1 ']'
+2025-12-13T19:26:57.3240415Z + exit 1
+2025-12-13T19:26:57.3289850Z ##[error]Process completed with exit code 1.
+2025-12-13T19:26:57.3390076Z Post job cleanup.
+2025-12-13T19:26:57.3394265Z ##[command]/usr/bin/docker exec  afe50f02e45c03b903a70317424225d5eaf4a00f32a5548f7f7e7000236897a1 sh -c "cat /etc/*release | grep ^ID"
+2025-12-13T19:26:57.5538987Z [command]/usr/bin/git version
+2025-12-13T19:26:57.5581245Z git version 2.47.3
+2025-12-13T19:26:57.5629974Z Temporarily overriding HOME='/__w/_temp/60324f55-3950-45ff-8d0b-0d4315886a86' before making global git config changes
+2025-12-13T19:26:57.5631135Z Adding repository directory to the temporary git global config as a safe directory
+2025-12-13T19:26:57.5635916Z [command]/usr/bin/git config --global --add safe.directory /__w/azahar_libretro/azahar_libretro
+2025-12-13T19:26:57.5674569Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2025-12-13T19:26:57.5710733Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2025-12-13T19:26:57.5971677Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-12-13T19:26:57.5994058Z http.https://github.com/.extraheader
+2025-12-13T19:26:57.6007731Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2025-12-13T19:26:57.6039497Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2025-12-13T19:26:57.6284792Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2025-12-13T19:26:57.6316751Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2025-12-13T19:26:57.6684364Z Stop and remove container: 2c90ced7b915478fb33e07566b90dc4d_opensauce04azaharbuildenvironmentlatest_6925d9
+2025-12-13T19:26:57.6689088Z ##[command]/usr/bin/docker rm --force afe50f02e45c03b903a70317424225d5eaf4a00f32a5548f7f7e7000236897a1
+2025-12-13T19:26:57.7759811Z afe50f02e45c03b903a70317424225d5eaf4a00f32a5548f7f7e7000236897a1
+2025-12-13T19:26:57.7789377Z Remove container network: github_network_f258ea148daa4a31b5b87a6a80f77e70
+2025-12-13T19:26:57.7793583Z ##[command]/usr/bin/docker network rm github_network_f258ea148daa4a31b5b87a6a80f77e70
+2025-12-13T19:26:57.9213575Z github_network_f258ea148daa4a31b5b87a6a80f77e70
+2025-12-13T19:26:57.9276281Z Cleaning up orphan processes

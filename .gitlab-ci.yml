@@ -6,6 +6,11 @@
     BASE_CORE_ARGS: -DENABLE_LIBRETRO=ON -DENABLE_SDL2=OFF -DENABLE_QT=OFF -DENABLE_TESTS=OFF -DENABLE_ROOM=OFF -DENABLE_WEB_SERVICE=OFF -DENABLE_SCRIPTING=OFF -DENABLE_CUBEB=OFF -DENABLE_OPENAL=OFF -DENABLE_LIBUSB=OFF -DCITRA_WARNINGS_AS_ERRORS=OFF
     CORE_ARGS: ${BASE_CORE_ARGS}
 
+.android-defs:
+  variables:
+    ANDROID_NDK_VERSION: 26.2.11394342
+    NDK_ROOT: /android-sdk-linux/ndk/$ANDROID_NDK_VERSION
+
 variables:
   STATIC_RETROARCH_BRANCH: master
   GIT_SUBMODULE_STRATEGY: recursive
@@ -104,9 +109,14 @@ android-arm64-v8a:
   extends:
     - .libretro-android-cmake-arm64-v8a
     - .core-defs
-  variables:
-    ANDROID_NDK_VERSION: 26.2.11394342
-    NDK_ROOT: /android-sdk-linux/ndk/$ANDROID_NDK_VERSION
+    - .android-defs
+
+# Android 64-bit x86
+android-x86_64:
+  extends:
+    - .libretro-android-cmake-x86_64
+    - .core-defs
+    - .android-defs
 
 # iOS arm64
 libretro-build-ios-arm64:
